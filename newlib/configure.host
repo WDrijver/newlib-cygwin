@@ -388,6 +388,10 @@ esac
 # THIS TABLE IS ALPHA SORTED.  KEEP IT THAT WAY.
 
 case "${host}" in
+  *-*-amiga*)
+	sys_dir=amigaos
+	newlib_cflags="${newlib_cflags} -DSIGNAL_PROVIDED"
+  	;;
   *-*-cygwin*)
 	posix_dir=posix
 	stdio64_dir=stdio64
@@ -748,6 +752,8 @@ newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED -DMALLOC_PROVIDED -DEXIT_PROVID
 	;;
   m68hc11-*-*|m6811-*-*|m68hc12-*-*|m6812-*-*)
 	newlib_cflags="${newlib_cflags} -DNO_EXEC -DABORT_PROVIDED -DSMALL_MEMORY -DMISSING_SYSCALL_NAMES"
+	;;
+  m68k-*-amiga*)
 	;;
   m68k-unknown-elf)
 	newlib_cflags="${newlib_cflags} -DHAVE_RENAME -DHAVE_SYSTEM -DMISSING_SYSCALL_NAMES"

@@ -99,7 +99,7 @@ worker (struct _reent *ptr,
   while (1)
     {
       int t;
-      _sprintf_r (ptr, result, "%s/%s%x.%x", part1, part2, part3, *part4);
+      _sprintf_r (ptr, result, "%s%s%x.%x", part1, part2, part3, *part4);
       (*part4)++;
       t = _open_r (ptr, result, O_RDONLY, 0);
       if (t == -1)

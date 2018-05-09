@@ -305,79 +305,79 @@ else
 endif
 	$(MULTIDO) $(AM_MAKEFLAGS) DO=install multi-do # $(MAKE)
 	-if [ -z "$(MULTISUBDIR)" ]; then \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include; \
 	  for i in $(srcdir)/libc/include/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/`basename $$i`; \
+	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/`basename $$i`; \
 	  done; \
-	  $(INSTALL_DATA) newlib.h $(DESTDIR)$(tooldir)/include/newlib.h; \
-	  $(INSTALL_DATA) _newlib_version.h $(DESTDIR)$(tooldir)/include/_newlib_version.h; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/machine; \
+	  $(INSTALL_DATA) newlib.h $(DESTDIR)$(tooldir)/sys-include/newlib.h; \
+	  $(INSTALL_DATA) _newlib_version.h $(DESTDIR)$(tooldir)/sys-include/_newlib_version.h; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include/machine; \
 	  for i in $(srcdir)/libc/include/machine/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/machine/`basename $$i`; \
+	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/machine/`basename $$i`; \
 	  done; \
 	  for i in $(srcdir)/libc/machine/$(machine_dir)/machine/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/machine/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/machine/`basename $$i`; \
 	    else true; fi ; \
 	  done; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/rpc; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include/rpc; \
 	  for i in $(srcdir)/libc/include/rpc/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/rpc/`basename $$i`; \
+	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/rpc/`basename $$i`; \
 	  done; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/ssp; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include/ssp; \
 	  for i in $(srcdir)/libc/include/ssp/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/ssp/`basename $$i`; \
+	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/ssp/`basename $$i`; \
 	  done; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/sys; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include/sys; \
 	  for i in $(srcdir)/libc/include/sys/*.h; do \
-	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/sys/`basename $$i`; \
+	   $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/sys/`basename $$i`; \
 	  done; \
 	  for i in $(srcdir)/libc/machine/$(machine_dir)/sys/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/sys/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/sys/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/machine/$(machine_dir)/include/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/sys/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/sys/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/sys/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
-	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/include/bits; \
+	  $(mkinstalldirs) $(DESTDIR)$(tooldir)/sys-include/bits; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/bits/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/bits/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/bits/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/machine/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/machine/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/machine/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/include/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/include/*; do \
 	    if [ -d $$i ]; then \
 		for j in $$i/*.h; do \
-	            $(INSTALL_DATA) $$j $(DESTDIR)$(tooldir)/include/`basename $$i`/`basename $$j`; \
+	            $(INSTALL_DATA) $$j $(DESTDIR)$(tooldir)/sys-include/`basename $$i`/`basename $$j`; \
 		done ; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(srcdir)/libc/sys/$(sys_dir)/machine/$(machine_dir)/include/*.h; do \
 	    if [ -f $$i ]; then \
-	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/include/machine/`basename $$i`; \
+	     $(INSTALL_DATA) $$i $(DESTDIR)$(tooldir)/sys-include/machine/`basename $$i`; \
 	    else true; fi ; \
 	  done ; \
 	  for i in $(NO_INCLUDE_LIST); do \
-	    if [ -f $(DESTDIR)$(tooldir)/include/$$i ]; then \
-		rm $(DESTDIR)$(tooldir)/include/$$i; \
+	    if [ -f $(DESTDIR)$(tooldir)/sys-include/$$i ]; then \
+		rm $(DESTDIR)$(tooldir)/sys-include/$$i; \
 	    else true; fi ; \
 	  done ; \
 	else true; fi

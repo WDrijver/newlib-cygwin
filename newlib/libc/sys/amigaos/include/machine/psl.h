@@ -1,5 +1,5 @@
-/*-
- * Copyright (c) 1989 The Regents of the University of California.
+/*
+ * Copyright (c) 1982, 1986 Regents of the University of California.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,58 +30,44 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	@(#)pwd.h	5.13 (Berkeley) 5/28/91
+ *	@(#)psl.h	7.2 (Berkeley) 5/4/91
  */
 
-#ifndef _PWD_H_
-#ifdef __cplusplus
-extern "C" {
+#ifndef PSL_C
+/*
+ * MC68000 program status word
+ */
+
+#define	PSL_C		0x0001		/* carry bit */
+#define	PSL_V		0x0002		/* overflow bit */
+#define	PSL_Z		0x0004		/* zero bit */
+#define	PSL_N		0x0008		/* negative bit */
+#define	PSL_X		0x0010		/* extend bit */
+#define	PSL_ALLCC	0x001F		/* all cc bits - unlikely */
+#define	PSL_IPL0	0x0000		/* interrupt priority level 0 */
+#define	PSL_IPL1	0x0100		/* interrupt priority level 1 */
+#define	PSL_IPL2	0x0200		/* interrupt priority level 2 */
+#define	PSL_IPL3	0x0300		/* interrupt priority level 3 */
+#define	PSL_IPL4	0x0400		/* interrupt priority level 4 */
+#define	PSL_IPL5	0x0500		/* interrupt priority level 5 */
+#define	PSL_IPL6	0x0600		/* interrupt priority level 6 */
+#define	PSL_IPL7	0x0700		/* interrupt priority level 7 */
+#define	PSL_S		0x2000		/* supervisor enable bit */
+#define	PSL_T		0x8000		/* trace enable bit */
+
+#define	PSL_LOWIPL	(PSL_S)
+#define	PSL_HIGHIPL	(PSL_S | PSL_IPL7)
+#define PSL_IPL		(PSL_IPL7)
+#define	PSL_USER	(0)
+
+#define	PSL_MBZ		0x58E0		/* must be zero bits */
+
+#define	PSL_USERSET	(0)
+#define	PSL_USERCLR	(PSL_S | PSL_IPL7 | PSL_MBZ)
+
+/*
+ * Macros to decode processor status word.
+ */
+#define	USERMODE(ps)	(((ps) & PSL_S) == 0)
+#define	BASEPRI(ps)	(((ps) & PSL_IPL7) == 0)
 #endif
-#define	_PWD_H_
-
-#include <sys/cdefs.h>
-#include <sys/types.h>
-
-#if __BSD_VISIBLE
-#define	_PATH_PASSWD		"/etc/passwd"
-
-#define	_PASSWORD_LEN		128	/* max length, not counting NULL */
-#endif
-
-struct passwd {
-	char	*pw_name;		/* user name */
-	char	*pw_passwd;		/* encrypted password */
-	uid_t	pw_uid;			/* user uid */
-	gid_t	pw_gid;			/* user gid */
-	char	*pw_comment;		/* comment */
-	char	*pw_gecos;		/* Honeywell login info */
-	char	*pw_dir;		/* home directory */
-	char	*pw_shell;		/* default shell */
-};
-
-#ifndef __INSIDE_CYGWIN__
-struct passwd	*getpwuid (uid_t);
-struct passwd	*getpwnam (const char *);
-
-#if __MISC_VISIBLE || __POSIX_VISIBLE
-int 		 getpwnam_r (const char *, struct passwd *,
-			char *, size_t , struct passwd **);
-int		 getpwuid_r (uid_t, struct passwd *, char *,
-			size_t, struct passwd **);
-#endif
-
-#if __MISC_VISIBLE || __XSI_VISIBLE >= 4
-struct passwd	*getpwent (void);
-void		 setpwent (void);
-void		 endpwent (void);
-#endif
-
-#if __BSD_VISIBLE
-int		 setpassent (int);
-#endif
-#endif /*!__INSIDE_CYGWIN__*/
-
-#ifdef __cplusplus
-}
-#endif
-#endif /* _PWD_H_ */
