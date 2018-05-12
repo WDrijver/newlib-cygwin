@@ -183,149 +183,149 @@ char *	ctermid (char *);
 #if __XSI_VISIBLE && __XSI_VISIBLE < 600
 char *	cuserid (char *);
 #endif
-FILE *	tmpfile (void);
-char *	tmpnam (char *);
+__stdargs FILE *	tmpfile (void);
+__stdargs char *	tmpnam (char *);
 #if __BSD_VISIBLE || __XSI_VISIBLE || __POSIX_VISIBLE >= 200112
-char *	tempnam (const char *, const char *);
+__stdargs char *	tempnam (const char *, const char *);
 #endif
-int	fclose (FILE *);
-int	fflush (FILE *);
-FILE *	freopen (const char *__restrict, const char *__restrict, FILE *__restrict);
-void	setbuf (FILE *__restrict, char *__restrict);
-int	setvbuf (FILE *__restrict, char *__restrict, int, size_t);
-int	fprintf (FILE *__restrict, const char *__restrict, ...)
+__stdargs int	fclose (FILE *);
+__stdargs int	fflush (FILE *);
+__stdargs FILE *	freopen (const char *__restrict, const char *__restrict, FILE *__restrict);
+__stdargs void	setbuf (FILE *__restrict, char *__restrict);
+__stdargs int	setvbuf (FILE *__restrict, char *__restrict, int, size_t);
+__stdargs int	fprintf (FILE *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	fscanf (FILE *__restrict, const char *__restrict, ...)
+__stdargs int	fscanf (FILE *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-int	printf (const char *__restrict, ...)
+__stdargs int	printf (const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 1, 2)));
-int	scanf (const char *__restrict, ...)
+__stdargs int	scanf (const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 1, 2)));
-int	sscanf (const char *__restrict, const char *__restrict, ...)
+__stdargs int	sscanf (const char *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-int	vfprintf (FILE *__restrict, const char *__restrict, __VALIST)
+__stdargs int	vfprintf (FILE *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	vprintf (const char *, __VALIST)
+__stdargs int	vprintf (const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 1, 0)));
-int	vsprintf (char *__restrict, const char *__restrict, __VALIST)
+__stdargs int	vsprintf (char *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	fgetc (FILE *);
-char *  fgets (char *__restrict, int, FILE *__restrict);
-int	fputc (int, FILE *);
-int	fputs (const char *__restrict, FILE *__restrict);
-int	getc (FILE *);
-int	getchar (void);
-char *  gets (char *);
-int	putc (int, FILE *);
-int	putchar (int);
-int	puts (const char *);
-int	ungetc (int, FILE *);
-size_t	fread (void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-size_t	fwrite (const void *__restrict , size_t _size, size_t _n, FILE *);
+__stdargs int	fgetc (FILE *);
+__stdargs char *  fgets (char *__restrict, int, FILE *__restrict);
+__stdargs int	fputc (int, FILE *);
+__stdargs int	fputs (const char *__restrict, FILE *__restrict);
+__stdargs int	getc (FILE *);
+__stdargs int	getchar (void);
+__stdargs char *  gets (char *);
+__stdargs int	putc (int, FILE *);
+__stdargs int	putchar (int);
+__stdargs int	puts (const char *);
+__stdargs int	ungetc (int, FILE *);
+__stdargs size_t	fread (void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs size_t	fwrite (const void *__restrict , size_t _size, size_t _n, FILE *);
 #ifdef _COMPILING_NEWLIB
-int	fgetpos (FILE *, _fpos_t *);
+__stdargs int	fgetpos (FILE *, _fpos_t *);
 #else
-int	fgetpos (FILE *__restrict, fpos_t *__restrict);
+__stdargs int	fgetpos (FILE *__restrict, fpos_t *__restrict);
 #endif
-int	fseek (FILE *, long, int);
+__stdargs int	fseek (FILE *, long, int);
 #ifdef _COMPILING_NEWLIB
-int	fsetpos (FILE *, const _fpos_t *);
+__stdargs int	fsetpos (FILE *, const _fpos_t *);
 #else
-int	fsetpos (FILE *, const fpos_t *);
+__stdargs int	fsetpos (FILE *, const fpos_t *);
 #endif
-long	ftell ( FILE *);
-void	rewind (FILE *);
-void	clearerr (FILE *);
-int	feof (FILE *);
-int	ferror (FILE *);
-void    perror (const char *);
+__stdargs long	ftell ( FILE *);
+__stdargs void	rewind (FILE *);
+__stdargs void	clearerr (FILE *);
+__stdargs int	feof (FILE *);
+__stdargs int	ferror (FILE *);
+__stdargs void    perror (const char *);
 #ifndef _REENT_ONLY
-FILE *	fopen (const char *__restrict _name, const char *__restrict _type);
-int	sprintf (char *__restrict, const char *__restrict, ...)
+__stdargs FILE *	fopen (const char *__restrict _name, const char *__restrict _type);
+__stdargs int	sprintf (char *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	remove (const char *);
-int	rename (const char *, const char *);
+__stdargs int	remove (const char *);
+__stdargs int	rename (const char *, const char *);
 #ifdef _COMPILING_NEWLIB
-int	_rename (const char *, const char *);
+__stdargs int	_rename (const char *, const char *);
 #endif
 #endif
 #if __LARGEFILE_VISIBLE || __POSIX_VISIBLE >= 200112
 #ifdef _COMPILING_NEWLIB
-int	fseeko (FILE *, _off_t, int);
-_off_t	ftello (FILE *);
+__stdargs int	fseeko (FILE *, _off_t, int);
+__stdargs _off_t	ftello (FILE *);
 #else
-int	fseeko (FILE *, off_t, int);
-off_t	ftello (FILE *);
+__stdargs int	fseeko (FILE *, off_t, int);
+__stdargs off_t	ftello (FILE *);
 #endif
 #endif
 #if __GNU_VISIBLE
-int	fcloseall (void);
+__stdargs int	fcloseall (void);
 #endif
 #ifndef _REENT_ONLY
 #if __ISO_C_VISIBLE >= 1999
-int	snprintf (char *__restrict, size_t, const char *__restrict, ...)
+__stdargs int	snprintf (char *__restrict, size_t, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	vsnprintf (char *__restrict, size_t, const char *__restrict, __VALIST)
+__stdargs int	vsnprintf (char *__restrict, size_t, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	vfscanf (FILE *__restrict, const char *__restrict, __VALIST)
+__stdargs int	vfscanf (FILE *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
-int	vscanf (const char *, __VALIST)
+__stdargs int	vscanf (const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 1, 0)));
-int	vsscanf (const char *__restrict, const char *__restrict, __VALIST)
+__stdargs int	vsscanf (const char *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
 #endif
 #if __GNU_VISIBLE
-int	asprintf (char **__restrict, const char *__restrict, ...)
+__stdargs int	asprintf (char **__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	vasprintf (char **, const char *, __VALIST)
+__stdargs int	vasprintf (char **, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
 #endif
 #if __MISC_VISIBLE /* Newlib-specific */
-int	asiprintf (char **, const char *, ...)
+__stdargs int	asiprintf (char **, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-char *	asniprintf (char *, size_t *, const char *, ...)
+__stdargs char *	asniprintf (char *, size_t *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-char *	asnprintf (char *__restrict, size_t *__restrict, const char *__restrict, ...)
+__stdargs char *	asnprintf (char *__restrict, size_t *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
 #ifndef diprintf
-int	diprintf (int, const char *, ...)
+__stdargs int	diprintf (int, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 #endif
-int	fiprintf (FILE *, const char *, ...)
+__stdargs int	fiprintf (FILE *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	fiscanf (FILE *, const char *, ...)
+__stdargs int	fiscanf (FILE *, const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-int	iprintf (const char *, ...)
+__stdargs int	iprintf (const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 1, 2)));
-int	iscanf (const char *, ...)
+__stdargs int	iscanf (const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 1, 2)));
-int	siprintf (char *, const char *, ...)
+__stdargs int	siprintf (char *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	siscanf (const char *, const char *, ...)
+__stdargs int	siscanf (const char *, const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-int	sniprintf (char *, size_t, const char *, ...)
+__stdargs int	sniprintf (char *, size_t, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	vasiprintf (char **, const char *, __VALIST)
+__stdargs int	vasiprintf (char **, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-char *	vasniprintf (char *, size_t *, const char *, __VALIST)
+__stdargs char *	vasniprintf (char *, size_t *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-char *	vasnprintf (char *, size_t *, const char *, __VALIST)
+__stdargs char *	vasnprintf (char *, size_t *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	vdiprintf (int, const char *, __VALIST)
+__stdargs int	vdiprintf (int, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	vfiprintf (FILE *, const char *, __VALIST)
+__stdargs int	vfiprintf (FILE *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	vfiscanf (FILE *, const char *, __VALIST)
+__stdargs int	vfiscanf (FILE *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
-int	viprintf (const char *, __VALIST)
+__stdargs int	viprintf (const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 1, 0)));
-int	viscanf (const char *, __VALIST)
+__stdargs int	viscanf (const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 1, 0)));
-int	vsiprintf (char *, const char *, __VALIST)
+__stdargs int	vsiprintf (char *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	vsiscanf (const char *, const char *, __VALIST)
+__stdargs int	vsiscanf (const char *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
-int	vsniprintf (char *, size_t, const char *, __VALIST)
+__stdargs int	vsniprintf (char *, size_t, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
 #endif /* __MISC_VISIBLE */
 #endif /* !_REENT_ONLY */
@@ -336,32 +336,32 @@ int	vsniprintf (char *, size_t, const char *, __VALIST)
 
 #if __POSIX_VISIBLE
 #ifndef _REENT_ONLY
-FILE *	fdopen (int, const char *);
+__stdargs FILE *	fdopen (int, const char *);
 #endif
-int	fileno (FILE *);
+__stdargs int	fileno (FILE *);
 #endif
 #if __MISC_VISIBLE || __POSIX_VISIBLE >= 199209
-int	pclose (FILE *);
-FILE *  popen (const char *, const char *);
+__stdargs int	pclose (FILE *);
+__stdargs FILE *  popen (const char *, const char *);
 #endif
 
 #if __BSD_VISIBLE
-void    setbuffer (FILE *, char *, int);
-int	setlinebuf (FILE *);
+__stdargs void    setbuffer (FILE *, char *, int);
+__stdargs int	setlinebuf (FILE *);
 #endif
 
 #if __MISC_VISIBLE || (__XSI_VISIBLE && __POSIX_VISIBLE < 200112)
-int	getw (FILE *);
-int	putw (int, FILE *);
+__stdargs int	getw (FILE *);
+__stdargs int	putw (int, FILE *);
 #endif
 #if __MISC_VISIBLE || __POSIX_VISIBLE
-int	getc_unlocked (FILE *);
-int	getchar_unlocked (void);
-void	flockfile (FILE *);
-int	ftrylockfile (FILE *);
-void	funlockfile (FILE *);
-int	putc_unlocked (int, FILE *);
-int	putchar_unlocked (int);
+__stdargs int	getc_unlocked (FILE *);
+__stdargs int	getchar_unlocked (void);
+__stdargs void	flockfile (FILE *);
+__stdargs int	ftrylockfile (FILE *);
+__stdargs void	funlockfile (FILE *);
+__stdargs int	putc_unlocked (int, FILE *);
+__stdargs int	putchar_unlocked (int);
 #endif
 
 /*
@@ -371,21 +371,21 @@ int	putchar_unlocked (int);
 #if __POSIX_VISIBLE >= 200809
 # ifndef _REENT_ONLY
 #  ifndef dprintf
-int	dprintf (int, const char *__restrict, ...)
+__stdargs int	dprintf (int, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 #  endif
-FILE *	fmemopen (void *__restrict, size_t, const char *__restrict);
+__stdargs FILE *	fmemopen (void *__restrict, size_t, const char *__restrict);
 /* getdelim - see __getdelim for now */
 /* getline - see __getline for now */
-FILE *	open_memstream (char **, size_t *);
-int	vdprintf (int, const char *__restrict, __VALIST)
+__stdargs FILE *	open_memstream (char **, size_t *);
+__stdargs int	vdprintf (int, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
 # endif
 #endif
 #if __ATFILE_VISIBLE
-int	renameat (int, const char *, int, const char *);
+__stdargs int	renameat (int, const char *, int, const char *);
 # ifdef __CYGWIN__
-int	renameat2 (int, const char *, int, const char *, unsigned int);
+__stdargs int	renameat2 (int, const char *, int, const char *, unsigned int);
 # endif
 #endif
 
@@ -393,159 +393,159 @@ int	renameat2 (int, const char *, int, const char *, unsigned int);
  * Recursive versions of the above.
  */
 
-int	_asiprintf_r (struct _reent *, char **, const char *, ...)
+__stdargs int	_asiprintf_r (struct _reent *, char **, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-char *	_asniprintf_r (struct _reent *, char *, size_t *, const char *, ...)
+__stdargs char *	_asniprintf_r (struct _reent *, char *, size_t *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 4, 5)));
-char *	_asnprintf_r (struct _reent *, char *__restrict, size_t *__restrict, const char *__restrict, ...)
+__stdargs char *	_asnprintf_r (struct _reent *, char *__restrict, size_t *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 4, 5)));
-int	_asprintf_r (struct _reent *, char **__restrict, const char *__restrict, ...)
+__stdargs int	_asprintf_r (struct _reent *, char **__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_diprintf_r (struct _reent *, int, const char *, ...)
+__stdargs int	_diprintf_r (struct _reent *, int, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_dprintf_r (struct _reent *, int, const char *__restrict, ...)
+__stdargs int	_dprintf_r (struct _reent *, int, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_fclose_r (struct _reent *, FILE *);
-int	_fcloseall_r (struct _reent *);
-FILE *	_fdopen_r (struct _reent *, int, const char *);
-int	_fflush_r (struct _reent *, FILE *);
-int	_fgetc_r (struct _reent *, FILE *);
-int	_fgetc_unlocked_r (struct _reent *, FILE *);
-char *  _fgets_r (struct _reent *, char *__restrict, int, FILE *__restrict);
-char *  _fgets_unlocked_r (struct _reent *, char *__restrict, int, FILE *__restrict);
+__stdargs int	_fclose_r (struct _reent *, FILE *);
+__stdargs int	_fcloseall_r (struct _reent *);
+__stdargs FILE *	_fdopen_r (struct _reent *, int, const char *);
+__stdargs int	_fflush_r (struct _reent *, FILE *);
+__stdargs int	_fgetc_r (struct _reent *, FILE *);
+__stdargs int	_fgetc_unlocked_r (struct _reent *, FILE *);
+__stdargs char *  _fgets_r (struct _reent *, char *__restrict, int, FILE *__restrict);
+__stdargs char *  _fgets_unlocked_r (struct _reent *, char *__restrict, int, FILE *__restrict);
 #ifdef _COMPILING_NEWLIB
-int	_fgetpos_r (struct _reent *, FILE *__restrict, _fpos_t *__restrict);
-int	_fsetpos_r (struct _reent *, FILE *, const _fpos_t *);
+__stdargs int	_fgetpos_r (struct _reent *, FILE *__restrict, _fpos_t *__restrict);
+__stdargs int	_fsetpos_r (struct _reent *, FILE *, const _fpos_t *);
 #else
-int	_fgetpos_r (struct _reent *, FILE *, fpos_t *);
-int	_fsetpos_r (struct _reent *, FILE *, const fpos_t *);
+__stdargs int	_fgetpos_r (struct _reent *, FILE *, fpos_t *);
+__stdargs int	_fsetpos_r (struct _reent *, FILE *, const fpos_t *);
 #endif
-int	_fiprintf_r (struct _reent *, FILE *, const char *, ...)
+__stdargs int	_fiprintf_r (struct _reent *, FILE *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_fiscanf_r (struct _reent *, FILE *, const char *, ...)
+__stdargs int	_fiscanf_r (struct _reent *, FILE *, const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 4)));
-FILE *	_fmemopen_r (struct _reent *, void *__restrict, size_t, const char *__restrict);
-FILE *	_fopen_r (struct _reent *, const char *__restrict, const char *__restrict);
-FILE *	_freopen_r (struct _reent *, const char *__restrict, const char *__restrict, FILE *__restrict);
-int	_fprintf_r (struct _reent *, FILE *__restrict, const char *__restrict, ...)
+__stdargs FILE *	_fmemopen_r (struct _reent *, void *__restrict, size_t, const char *__restrict);
+__stdargs FILE *	_fopen_r (struct _reent *, const char *__restrict, const char *__restrict);
+__stdargs FILE *	_freopen_r (struct _reent *, const char *__restrict, const char *__restrict, FILE *__restrict);
+__stdargs int	_fprintf_r (struct _reent *, FILE *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_fpurge_r (struct _reent *, FILE *);
-int	_fputc_r (struct _reent *, int, FILE *);
-int	_fputc_unlocked_r (struct _reent *, int, FILE *);
-int	_fputs_r (struct _reent *, const char *__restrict, FILE *__restrict);
-int	_fputs_unlocked_r (struct _reent *, const char *__restrict, FILE *__restrict);
-size_t	_fread_r (struct _reent *, void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-size_t	_fread_unlocked_r (struct _reent *, void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-int	_fscanf_r (struct _reent *, FILE *__restrict, const char *__restrict, ...)
+__stdargs int	_fpurge_r (struct _reent *, FILE *);
+__stdargs int	_fputc_r (struct _reent *, int, FILE *);
+__stdargs int	_fputc_unlocked_r (struct _reent *, int, FILE *);
+__stdargs int	_fputs_r (struct _reent *, const char *__restrict, FILE *__restrict);
+__stdargs int	_fputs_unlocked_r (struct _reent *, const char *__restrict, FILE *__restrict);
+__stdargs size_t	_fread_r (struct _reent *, void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs size_t	_fread_unlocked_r (struct _reent *, void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs int	_fscanf_r (struct _reent *, FILE *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 4)));
-int	_fseek_r (struct _reent *, FILE *, long, int);
-int	_fseeko_r (struct _reent *, FILE *, _off_t, int);
-long	_ftell_r (struct _reent *, FILE *);
-_off_t	_ftello_r (struct _reent *, FILE *);
-void	_rewind_r (struct _reent *, FILE *);
-size_t	_fwrite_r (struct _reent *, const void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-size_t	_fwrite_unlocked_r (struct _reent *, const void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-int	_getc_r (struct _reent *, FILE *);
-int	_getc_unlocked_r (struct _reent *, FILE *);
-int	_getchar_r (struct _reent *);
-int	_getchar_unlocked_r (struct _reent *);
-char *	_gets_r (struct _reent *, char *);
-int	_iprintf_r (struct _reent *, const char *, ...)
+__stdargs int	_fseek_r (struct _reent *, FILE *, long, int);
+__stdargs int	_fseeko_r (struct _reent *, FILE *, _off_t, int);
+__stdargs long	_ftell_r (struct _reent *, FILE *);
+__stdargs _off_t	_ftello_r (struct _reent *, FILE *);
+__stdargs void	_rewind_r (struct _reent *, FILE *);
+__stdargs size_t	_fwrite_r (struct _reent *, const void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs size_t	_fwrite_unlocked_r (struct _reent *, const void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs int	_getc_r (struct _reent *, FILE *);
+__stdargs int	_getc_unlocked_r (struct _reent *, FILE *);
+__stdargs int	_getchar_r (struct _reent *);
+__stdargs int	_getchar_unlocked_r (struct _reent *);
+__stdargs char *	_gets_r (struct _reent *, char *);
+__stdargs int	_iprintf_r (struct _reent *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	_iscanf_r (struct _reent *, const char *, ...)
+__stdargs int	_iscanf_r (struct _reent *, const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-FILE *	_open_memstream_r (struct _reent *, char **, size_t *);
-void	_perror_r (struct _reent *, const char *);
-int	_printf_r (struct _reent *, const char *__restrict, ...)
+__stdargs FILE *	_open_memstream_r (struct _reent *, char **, size_t *);
+__stdargs void	_perror_r (struct _reent *, const char *);
+__stdargs int	_printf_r (struct _reent *, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 2, 3)));
-int	_putc_r (struct _reent *, int, FILE *);
-int	_putc_unlocked_r (struct _reent *, int, FILE *);
-int	_putchar_unlocked_r (struct _reent *, int);
-int	_putchar_r (struct _reent *, int);
-int	_puts_r (struct _reent *, const char *);
-int	_remove_r (struct _reent *, const char *);
-int	_rename_r (struct _reent *,
+__stdargs int	_putc_r (struct _reent *, int, FILE *);
+__stdargs int	_putc_unlocked_r (struct _reent *, int, FILE *);
+__stdargs int	_putchar_unlocked_r (struct _reent *, int);
+__stdargs int	_putchar_r (struct _reent *, int);
+__stdargs int	_puts_r (struct _reent *, const char *);
+__stdargs int	_remove_r (struct _reent *, const char *);
+__stdargs int	_rename_r (struct _reent *,
 			   const char *_old, const char *_new);
-int	_scanf_r (struct _reent *, const char *__restrict, ...)
+__stdargs int	_scanf_r (struct _reent *, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 3)));
-int	_siprintf_r (struct _reent *, char *, const char *, ...)
+__stdargs int	_siprintf_r (struct _reent *, char *, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_siscanf_r (struct _reent *, const char *, const char *, ...)
+__stdargs int	_siscanf_r (struct _reent *, const char *, const char *, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 4)));
-int	_sniprintf_r (struct _reent *, char *, size_t, const char *, ...)
+__stdargs int	_sniprintf_r (struct _reent *, char *, size_t, const char *, ...)
                _ATTRIBUTE ((__format__ (__printf__, 4, 5)));
-int	_snprintf_r (struct _reent *, char *__restrict, size_t, const char *__restrict, ...)
+__stdargs int	_snprintf_r (struct _reent *, char *__restrict, size_t, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 4, 5)));
-int	_sprintf_r (struct _reent *, char *__restrict, const char *__restrict, ...)
+__stdargs int	_sprintf_r (struct _reent *, char *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__printf__, 3, 4)));
-int	_sscanf_r (struct _reent *, const char *__restrict, const char *__restrict, ...)
+__stdargs int	_sscanf_r (struct _reent *, const char *__restrict, const char *__restrict, ...)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 4)));
-char *	_tempnam_r (struct _reent *, const char *, const char *);
-FILE *	_tmpfile_r (struct _reent *);
-char *	_tmpnam_r (struct _reent *, char *);
-int	_ungetc_r (struct _reent *, int, FILE *);
-int	_vasiprintf_r (struct _reent *, char **, const char *, __VALIST)
+__stdargs char *	_tempnam_r (struct _reent *, const char *, const char *);
+__stdargs FILE *	_tmpfile_r (struct _reent *);
+__stdargs char *	_tmpnam_r (struct _reent *, char *);
+__stdargs int	_ungetc_r (struct _reent *, int, FILE *);
+__stdargs int	_vasiprintf_r (struct _reent *, char **, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-char *	_vasniprintf_r (struct _reent*, char *, size_t *, const char *, __VALIST)
+__stdargs char *	_vasniprintf_r (struct _reent*, char *, size_t *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 4, 0)));
-char *	_vasnprintf_r (struct _reent*, char *, size_t *, const char *, __VALIST)
+__stdargs char *	_vasnprintf_r (struct _reent*, char *, size_t *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 4, 0)));
-int	_vasprintf_r (struct _reent *, char **, const char *, __VALIST)
+__stdargs int	_vasprintf_r (struct _reent *, char **, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vdiprintf_r (struct _reent *, int, const char *, __VALIST)
+__stdargs int	_vdiprintf_r (struct _reent *, int, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vdprintf_r (struct _reent *, int, const char *__restrict, __VALIST)
+__stdargs int	_vdprintf_r (struct _reent *, int, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vfiprintf_r (struct _reent *, FILE *, const char *, __VALIST)
+__stdargs int	_vfiprintf_r (struct _reent *, FILE *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vfiscanf_r (struct _reent *, FILE *, const char *, __VALIST)
+__stdargs int	_vfiscanf_r (struct _reent *, FILE *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 0)));
-int	_vfprintf_r (struct _reent *, FILE *__restrict, const char *__restrict, __VALIST)
+__stdargs int	_vfprintf_r (struct _reent *, FILE *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vfscanf_r (struct _reent *, FILE *__restrict, const char *__restrict, __VALIST)
+__stdargs int	_vfscanf_r (struct _reent *, FILE *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 0)));
-int	_viprintf_r (struct _reent *, const char *, __VALIST)
+__stdargs int	_viprintf_r (struct _reent *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	_viscanf_r (struct _reent *, const char *, __VALIST)
+__stdargs int	_viscanf_r (struct _reent *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
-int	_vprintf_r (struct _reent *, const char *__restrict, __VALIST)
+__stdargs int	_vprintf_r (struct _reent *, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-int	_vscanf_r (struct _reent *, const char *__restrict, __VALIST)
+__stdargs int	_vscanf_r (struct _reent *, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 2, 0)));
-int	_vsiprintf_r (struct _reent *, char *, const char *, __VALIST)
+__stdargs int	_vsiprintf_r (struct _reent *, char *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vsiscanf_r (struct _reent *, const char *, const char *, __VALIST)
+__stdargs int	_vsiscanf_r (struct _reent *, const char *, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 0)));
-int	_vsniprintf_r (struct _reent *, char *, size_t, const char *, __VALIST)
+__stdargs int	_vsniprintf_r (struct _reent *, char *, size_t, const char *, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 4, 0)));
-int	_vsnprintf_r (struct _reent *, char *__restrict, size_t, const char *__restrict, __VALIST)
+__stdargs int	_vsnprintf_r (struct _reent *, char *__restrict, size_t, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 4, 0)));
-int	_vsprintf_r (struct _reent *, char *__restrict, const char *__restrict, __VALIST)
+__stdargs int	_vsprintf_r (struct _reent *, char *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-int	_vsscanf_r (struct _reent *, const char *__restrict, const char *__restrict, __VALIST)
+__stdargs int	_vsscanf_r (struct _reent *, const char *__restrict, const char *__restrict, __VALIST)
                _ATTRIBUTE ((__format__ (__scanf__, 3, 0)));
 
 /* Other extensions.  */
 
-int	fpurge (FILE *);
-ssize_t __getdelim (char **, size_t *, int, FILE *);
-ssize_t __getline (char **, size_t *, FILE *);
+__stdargs int	fpurge (FILE *);
+__stdargs ssize_t __getdelim (char **, size_t *, int, FILE *);
+__stdargs ssize_t __getline (char **, size_t *, FILE *);
 
 #if __MISC_VISIBLE
-void	clearerr_unlocked (FILE *);
-int	feof_unlocked (FILE *);
-int	ferror_unlocked (FILE *);
-int	fileno_unlocked (FILE *);
-int	fflush_unlocked (FILE *);
-int	fgetc_unlocked (FILE *);
-int	fputc_unlocked (int, FILE *);
-size_t	fread_unlocked (void *__restrict, size_t _size, size_t _n, FILE *__restrict);
-size_t	fwrite_unlocked (const void *__restrict , size_t _size, size_t _n, FILE *);
+__stdargs void	clearerr_unlocked (FILE *);
+__stdargs int	feof_unlocked (FILE *);
+__stdargs int	ferror_unlocked (FILE *);
+__stdargs int	fileno_unlocked (FILE *);
+__stdargs int	fflush_unlocked (FILE *);
+__stdargs int	fgetc_unlocked (FILE *);
+__stdargs int	fputc_unlocked (int, FILE *);
+__stdargs size_t	fread_unlocked (void *__restrict, size_t _size, size_t _n, FILE *__restrict);
+__stdargs size_t	fwrite_unlocked (const void *__restrict , size_t _size, size_t _n, FILE *);
 #endif
 
 #if __GNU_VISIBLE
-char *  fgets_unlocked (char *__restrict, int, FILE *__restrict);
-int	fputs_unlocked (const char *__restrict, FILE *__restrict);
+__stdargs char *  fgets_unlocked (char *__restrict, int, FILE *__restrict);
+__stdargs int	fputs_unlocked (const char *__restrict, FILE *__restrict);
 #endif
 
 #ifdef __LARGE64_FILES
@@ -574,8 +574,8 @@ FILE *  _tmpfile64_r (struct _reent *);
  * Routines internal to the implementation.
  */
 
-int	__srget_r (struct _reent *, FILE *);
-int	__swbuf_r (struct _reent *, int, FILE *);
+__stdargs int	__srget_r (struct _reent *, FILE *);
+__stdargs int	__swbuf_r (struct _reent *, int, FILE *);
 
 /*
  * Stdio function-access interface.
@@ -598,20 +598,20 @@ FILE	*_funopen_r (struct _reent *, const void *__cookie,
 		_fpos64_t (*__seekfn)(void *__c, _fpos64_t __off, int __whence),
 		int (*__closefn)(void *__c));
 # else
-FILE	*funopen (const void *__cookie,
-		int (*__readfn)(void *__cookie, char *__buf,
+__stdargs FILE	*funopen (const void *__cookie,
+		__stdargs int (*__readfn)(void *__cookie, char *__buf,
 				_READ_WRITE_BUFSIZE_TYPE __n),
-		int (*__writefn)(void *__cookie, const char *__buf,
+				__stdargs int (*__writefn)(void *__cookie, const char *__buf,
 				 _READ_WRITE_BUFSIZE_TYPE __n),
-		fpos_t (*__seekfn)(void *__cookie, fpos_t __off, int __whence),
-		int (*__closefn)(void *__cookie));
-FILE	*_funopen_r (struct _reent *, const void *__cookie,
-		int (*__readfn)(void *__cookie, char *__buf,
+				 __stdargs fpos_t (*__seekfn)(void *__cookie, fpos_t __off, int __whence),
+				 __stdargs int (*__closefn)(void *__cookie));
+__stdargs FILE	*_funopen_r (struct _reent *, const void *__cookie,
+		__stdargs int (*__readfn)(void *__cookie, char *__buf,
 				_READ_WRITE_BUFSIZE_TYPE __n),
-		int (*__writefn)(void *__cookie, const char *__buf,
+				__stdargs int (*__writefn)(void *__cookie, const char *__buf,
 				 _READ_WRITE_BUFSIZE_TYPE __n),
-		fpos_t (*__seekfn)(void *__cookie, fpos_t __off, int __whence),
-		int (*__closefn)(void *__cookie));
+				 __stdargs fpos_t (*__seekfn)(void *__cookie, fpos_t __off, int __whence),
+				 __stdargs int (*__closefn)(void *__cookie));
 # endif /* !__LARGE64_FILES */
 
 # define	fropen(__cookie, __fn) funopen(__cookie, __fn, (int (*)())0, \
@@ -621,16 +621,16 @@ FILE	*_funopen_r (struct _reent *, const void *__cookie,
 #endif /* __BSD_VISIBLE */
 
 #if __GNU_VISIBLE
-typedef ssize_t cookie_read_function_t(void *__cookie, char *__buf, size_t __n);
-typedef ssize_t cookie_write_function_t(void *__cookie, const char *__buf,
+__stdargs typedef ssize_t cookie_read_function_t(void *__cookie, char *__buf, size_t __n);
+__stdargs typedef ssize_t cookie_write_function_t(void *__cookie, const char *__buf,
 					size_t __n);
 # ifdef __LARGE64_FILES
 typedef int cookie_seek_function_t(void *__cookie, _off64_t *__off,
 				   int __whence);
 # else
-typedef int cookie_seek_function_t(void *__cookie, off_t *__off, int __whence);
+typedef __stdargs int cookie_seek_function_t(void *__cookie, off_t *__off, int __whence);
 # endif /* !__LARGE64_FILES */
-typedef int cookie_close_function_t(void *__cookie);
+typedef __stdargs int cookie_close_function_t(void *__cookie);
 typedef struct
 {
   /* These four struct member names are dictated by Linux; hopefully,
@@ -640,9 +640,9 @@ typedef struct
   cookie_seek_function_t  *seek;
   cookie_close_function_t *close;
 } cookie_io_functions_t;
-FILE *fopencookie (void *__cookie,
+__stdargs FILE *fopencookie (void *__cookie,
 		const char *__mode, cookie_io_functions_t __functions);
-FILE *_fopencookie_r (struct _reent *, void *__cookie,
+__stdargs FILE *_fopencookie_r (struct _reent *, void *__cookie,
 		const char *__mode, cookie_io_functions_t __functions);
 #endif /* __GNU_VISIBLE */
 
