@@ -8,9 +8,6 @@
 #include <proto/exec.h>
 #include <inline/exec.h>
 
-int __oslibversion;
-int __nocommandline;
-
 int _kill(int pid, int sig) {
 
 }
@@ -47,6 +44,11 @@ int _write(int file, char *ptr, int len) {
 		printf("write %08x : %d\n", file, len);
 	return Write((BPTR)file, ptr, len);
 }
+
+int write(int file, char *ptr, int len) {
+	return _write(file, ptr, len);
+}
+
 int _read(int file, char *ptr, int len) {
 	if ((unsigned)file <=2)
 		file = (int)Input();
@@ -54,6 +56,11 @@ int _read(int file, char *ptr, int len) {
 		printf("read %08x : %d\n", file, len);
 	return Read((BPTR)file, ptr, len);
 }
+
+int read(int file, char *ptr, int len) {
+	return _read(file, ptr, len);
+}
+
 int _lseek(int file, int ptr, int dir) {
 	printf("seek %08x : %d - %d\n", file, ptr, dir);
 	SetIoErr(0);
@@ -67,6 +74,11 @@ int _lseek(int file, int ptr, int dir) {
 		return ptr;
 	return Seek((BPTR)file, 0, OFFSET_CURRENT);
 }
+
+int lseek(int file, int ptr, int dir) {
+	return _lseek(file, ptr, dir);
+}
+
 int _fstat(int file, struct stat *st) {
 	return 0;
 }
@@ -76,4 +88,10 @@ int _isatty(int file) {
 
 int _unlink(char *name) {
 	return !DeleteFile(name);
+}
+
+int __stdargs
+ioctl (int fd, unsigned long cmd, ...)
+{
+  return -1;
 }

@@ -27,16 +27,16 @@ struct Message * __WBenchMsg;
 
 #if defined(__pic__) || defined (__PIC__)
 extern const int __bss_size;
-extern int __edata;
+extern int _edata;
 void __restore_a4(void);
 __saveds
 #endif
 
 __entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) {
 #if defined(__pic__) || defined (__PIC__)
-	asm("lea __a4_init,a4");
+	asm("lea ___a4_init,a4");
 	// clear bss
-	int * p = &__edata;
+	int * p = &_edata;
 	for (unsigned sz = __bss_size;sz;--sz)
 	*p++ = 0;
 
@@ -62,7 +62,7 @@ __entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) 
 
 #if defined(__pic__) || defined (__PIC__)
 void __entrypoint __restore_a4(void) {
-	asm("lea __a4_init,a4");
+	asm("lea ___a4_init,a4");
 }
 __saveds
 #endif
@@ -134,6 +134,7 @@ void __initlibraries(void) {
 	while (numbases) {
 		struct lib *l = *list++;
 		if ((l->base = OpenLibrary(l->name, 0)) == 0) {
+			perror("can't open library:");
 			perror(l->name);
 			exit(1);
 		}
@@ -159,5 +160,27 @@ void __exitlibraries(void) {
 	}
 }
 
+typedef void (*func_ptr) (void);
+
+extern func_ptr __CTOR_LIST__[];
+extern func_ptr __DTOR_LIST__[];
+
+void __initcpp() {
+  func_ptr *p0 = __CTOR_LIST__ + 1;
+  func_ptr *p;
+  for (p = p0; *p; p++);
+  while (p > p0)
+    (*--p)();
+}
+
+void __exitcpp() {
+  func_ptr *p = __DTOR_LIST__ + 1;
+  while (*p)
+    (*p++)();
+}
+
 ADD2INIT(__initlibraries, -60);
 ADD2EXIT(__exitlibraries, -60);
+ADD2INIT(__initcpp, 100);
+ADD2EXIT(__exitcpp, 100);
+ALIAS(_exit, exit);
