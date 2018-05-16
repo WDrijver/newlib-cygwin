@@ -23,6 +23,10 @@ __errno ()
 #endif
 #endif
 
+#ifndef __IMPORT
+#define __IMPORT
+#endif
+
 /* Please don't use these variables directly.
    Use strerror instead. */
 extern __IMPORT const char * const _sys_errlist[];
