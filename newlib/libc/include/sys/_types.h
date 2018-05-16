@@ -169,6 +169,7 @@ typedef struct
     unsigned char __wchb[4];
   } __value;		/* Value so far.  */
 } _mbstate_t;
+#define __machine_mbstate_t_defined
 #endif
 
 #ifndef __machine_flock_t_defined
