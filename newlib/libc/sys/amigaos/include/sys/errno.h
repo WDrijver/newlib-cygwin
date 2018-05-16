@@ -15,7 +15,7 @@ extern "C" {
 #ifdef __NO_INLINE__
 extern int *__errno (void);
 #else
-inline __stdargs int *
+static inline __stdargs int *
 __errno ()
 {
   return &_REENT->_errno;
