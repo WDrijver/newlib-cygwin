@@ -16,10 +16,18 @@ int _getpid() {
 	return (int)FindTask(0);
 }
 
+extern BPTR * __fh;
+extern int __maxfh;
+
+
 int _lseek(int file, int ptr, int dir) {
-	printf("seek %08x : %d - %d\n", file, ptr, dir);
+	if (file >= __maxfh) {
+		errno = EIO;
+		return -1;
+	}
+
 	SetIoErr(0);
-	Seek((BPTR)file, ptr, dir - 1);
+	Seek(__fh[file], ptr, dir - 1);
 	int err = IoErr();
 	if (err) {
 		errno = EIO;
@@ -27,7 +35,7 @@ int _lseek(int file, int ptr, int dir) {
 	}
 	if (dir == SEEK_SET)
 		return ptr;
-	return Seek((BPTR)file, 0, OFFSET_CURRENT);
+	return Seek(__fh[file], 0, OFFSET_CURRENT);
 }
 
 int lseek(int file, int ptr, int dir) {
@@ -36,10 +44,6 @@ int lseek(int file, int ptr, int dir) {
 
 int _fstat(int file, struct stat *st) {
 	return 0;
-}
-
-int _isatty(int file) {
-	return (unsigned)file <= 2;
 }
 
 int _unlink(char *name) {

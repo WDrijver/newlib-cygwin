@@ -9,6 +9,7 @@
 extern __stdargs int main(int, char **);
 extern __stdargs void perror(const char *string);
 
+extern struct Library * DOSBase;
 extern int __INIT_LIST__;
 extern int __EXIT_LIST__;
 __entrypoint __stdargs int exit(int);
@@ -134,8 +135,10 @@ void __initlibraries(void) {
 	while (numbases) {
 		struct lib *l = *list++;
 		if ((l->base = OpenLibrary(l->name, 0)) == 0) {
-			perror("can't open library:");
-			perror(l->name);
+			if (DOSBase) {
+				fputs(2, "can't open library:");
+				fputs(2, l->name);
+			}
 			exit(1);
 		}
 		--numbases;

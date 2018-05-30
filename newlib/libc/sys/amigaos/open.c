@@ -8,7 +8,7 @@
 #include <stabs.h>
 
 BPTR * __fh;
-static int maxfh;
+int __maxfh;
 
 int _open(const char *name, int flags, ...) {
 	int mode;
@@ -25,19 +25,20 @@ int _open(const char *name, int flags, ...) {
 		return -1;
 
 	int fh = 3;
-	while(fh < maxfh) {
+	while(fh < __maxfh) {
 		if (!__fh[fh])
 			break;
 		++fh;
 	}
 
-	if (fh == maxfh) {
-		int n = maxfh + maxfh + 8;
+	if (fh == __maxfh) {
+		int n = __maxfh + __maxfh + 8;
 		__fh = (BPTR*)realloc(__fh, n * sizeof(BPTR));
-		if (!__fh)
-			abort();
-		while (maxfh < n) {
-			__fh[maxfh++] = 0;
+		if (!__fh) {
+			exit(ENOMEM);
+		}
+		while (__maxfh < n) {
+			__fh[__maxfh++] = 0;
 		}
 	}
 	__fh[fh] = r;
@@ -46,7 +47,7 @@ int _open(const char *name, int flags, ...) {
 
 int _close(int file) {
 	int r = -1;
-	if (file < maxfh) {
+	if (file < __maxfh) {
 		 r = Close(__fh[file]) == 0;
 		 __fh[file] = 0;
 	}
@@ -55,32 +56,38 @@ int _close(int file) {
 
 
 int _write(int file, char *ptr, int len) {
-	if (file < maxfh)
+	if (file < __maxfh)
 		return Write(__fh[file], ptr, len);
 	return -1;
 }
 
 int _read(int file, char *ptr, int len) {
-	if (file < maxfh)
+	if (file < __maxfh)
 		return Read(__fh[file], ptr, len);
+	return -1;
 }
 
 
 void __init_fh() {
-	__fh = (BPTR *)calloc(4, sizeof(BPTR));
+	__fh = (BPTR *)malloc(4 * sizeof(BPTR));
 	if (!__fh)
-		abort();
+		exit(ENOMEM);
 
-	maxfh = 4;
+	__maxfh = 4;
 	__fh[0] = Input();
 	__fh[1] = __fh[2] = Output();
+	__fh[3] = 0;
 }
 
 void __exit_fh() {
-	for (int i = 3; i < maxfh; ++i) {
+	for (int i = 3; i < __maxfh; ++i) {
 		if (__fh[i])
 			Close(__fh[i]);
 	}
+}
+
+int _isatty(int file) {
+	return (unsigned)file <= 2;
 }
 
 ADD2INIT(__init_fh, -50);
