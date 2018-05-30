@@ -71,24 +71,25 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-dummy.$(OBJEXT) lib_a-__divsi3.$(OBJEXT) \
-	lib_a-__adddf3.$(OBJEXT) lib_a-__divdf3.$(OBJEXT) \
-	lib_a-__eqdf2.$(OBJEXT) lib_a-__fixdfsi.$(OBJEXT) \
-	lib_a-__fixunssfsi.$(OBJEXT) lib_a-__floatunsidf.$(OBJEXT) \
-	lib_a-__mulsf3.$(OBJEXT) lib_a-__negsf2.$(OBJEXT) \
-	lib_a-__truncdfsf2.$(OBJEXT) lib_a-__addsf3.$(OBJEXT) \
-	lib_a-__divsf3.$(OBJEXT) lib_a-__eqsf2.$(OBJEXT) \
-	lib_a-__fixsfsi.$(OBJEXT) lib_a-__floatsidf.$(OBJEXT) \
-	lib_a-__floatunsisf.$(OBJEXT) lib_a-__mulsi3.$(OBJEXT) \
-	lib_a-__subdf3.$(OBJEXT) lib_a-__udivsi3.$(OBJEXT) \
-	lib_a-__cmpxf2.$(OBJEXT) lib_a-__divsi3.$(OBJEXT) \
-	lib_a-__extendsfdf2.$(OBJEXT) lib_a-__fixunsdfsi.$(OBJEXT) \
-	lib_a-__floatsisf.$(OBJEXT) lib_a-__muldf3.$(OBJEXT) \
-	lib_a-__negdf2.$(OBJEXT) lib_a-__subsf3.$(OBJEXT) \
-	lib_a-isinf.$(OBJEXT) lib_a-isnan.$(OBJEXT) \
-	lib_a-__init_list__.$(OBJEXT) lib_a-__exit_list__.$(OBJEXT) \
-	lib_a-__lib_list__.$(OBJEXT) lib_a-__dosbase.$(OBJEXT) \
-	lib_a-__unorddf2.$(OBJEXT) lib_a-__mathieeedoubbas.$(OBJEXT) \
+am_lib_a_OBJECTS = lib_a-dummy.$(OBJEXT) lib_a-open.$(OBJEXT) \
+	lib_a-__divsi3.$(OBJEXT) lib_a-__adddf3.$(OBJEXT) \
+	lib_a-__divdf3.$(OBJEXT) lib_a-__eqdf2.$(OBJEXT) \
+	lib_a-__fixdfsi.$(OBJEXT) lib_a-__fixunssfsi.$(OBJEXT) \
+	lib_a-__floatunsidf.$(OBJEXT) lib_a-__mulsf3.$(OBJEXT) \
+	lib_a-__negsf2.$(OBJEXT) lib_a-__truncdfsf2.$(OBJEXT) \
+	lib_a-__addsf3.$(OBJEXT) lib_a-__divsf3.$(OBJEXT) \
+	lib_a-__eqsf2.$(OBJEXT) lib_a-__fixsfsi.$(OBJEXT) \
+	lib_a-__floatsidf.$(OBJEXT) lib_a-__floatunsisf.$(OBJEXT) \
+	lib_a-__mulsi3.$(OBJEXT) lib_a-__subdf3.$(OBJEXT) \
+	lib_a-__udivsi3.$(OBJEXT) lib_a-__cmpxf2.$(OBJEXT) \
+	lib_a-__divsi3.$(OBJEXT) lib_a-__extendsfdf2.$(OBJEXT) \
+	lib_a-__fixunsdfsi.$(OBJEXT) lib_a-__floatsisf.$(OBJEXT) \
+	lib_a-__muldf3.$(OBJEXT) lib_a-__negdf2.$(OBJEXT) \
+	lib_a-__subsf3.$(OBJEXT) lib_a-isinf.$(OBJEXT) \
+	lib_a-isnan.$(OBJEXT) lib_a-__init_list__.$(OBJEXT) \
+	lib_a-__exit_list__.$(OBJEXT) lib_a-__lib_list__.$(OBJEXT) \
+	lib_a-__dosbase.$(OBJEXT) lib_a-__unorddf2.$(OBJEXT) \
+	lib_a-__mathieeedoubbas.$(OBJEXT) \
 	lib_a-__ctor_list__.$(OBJEXT) lib_a-__dtor_list__.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -212,7 +213,7 @@ top_srcdir = @top_srcdir@
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = dummy.c __divsi3.c  \
+lib_a_SOURCES = dummy.c open.c __divsi3.c  \
 __adddf3.c  __divdf3.c  __eqdf2.c        __fixdfsi.c     __fixunssfsi.c  __floatunsidf.c  __mulsf3.c  __negsf2.c  __truncdfsf2.c \
 __addsf3.c  __divsf3.c  __eqsf2.c        __fixsfsi.c     __floatsidf.c   __floatunsisf.c  __mulsi3.c  __subdf3.c  __udivsi3.c \
 __cmpxf2.c  __divsi3.c  __extendsfdf2.c  __fixunsdfsi.c  __floatsisf.c   __muldf3.c       __negdf2.c  __subsf3.c \
@@ -288,6 +289,12 @@ lib_a-dummy.o: dummy.c
 
 lib_a-dummy.obj: dummy.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-dummy.obj `if test -f 'dummy.c'; then $(CYGPATH_W) 'dummy.c'; else $(CYGPATH_W) '$(srcdir)/dummy.c'; fi`
+
+lib_a-open.o: open.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-open.o `test -f 'open.c' || echo '$(srcdir)/'`open.c
+
+lib_a-open.obj: open.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-open.obj `if test -f 'open.c'; then $(CYGPATH_W) 'open.c'; else $(CYGPATH_W) '$(srcdir)/open.c'; fi`
 
 lib_a-__divsi3.o: __divsi3.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__divsi3.o `test -f '__divsi3.c' || echo '$(srcdir)/'`__divsi3.c

@@ -54,7 +54,7 @@ __entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) 
 		WaitPort(&task->pr_MsgPort);
 		__WBenchMsg = GetMsg(&task->pr_MsgPort);
 	}
-	callfuncs(&__INIT_LIST__ + 1, -1);
+	callfuncs(&__INIT_LIST__ + 1, 0);
 	__argv[0] = __commandline;
 	__argc = 1;
 	exit(main(__argc, __argv));
@@ -76,7 +76,7 @@ __entrypoint __stdargs int exit(int rc) {
 	asm("move.l %0,d6"::"r"(rc));
 
 	cleanupflag ^= -1;
-	callfuncs(&__EXIT_LIST__ + 1, 0);
+	callfuncs(&__EXIT_LIST__ + 1, -1);
 
 	if (__WBenchMsg) {
 		Forbid();
@@ -179,8 +179,8 @@ void __exitcpp() {
     (*p++)();
 }
 
-ADD2INIT(__initlibraries, -60);
-ADD2EXIT(__exitlibraries, -60);
+ADD2INIT(__initlibraries, -100);
+ADD2EXIT(__exitlibraries, -100);
 ADD2INIT(__initcpp, 100);
 ADD2EXIT(__exitcpp, 100);
 ALIAS(_exit, exit);
