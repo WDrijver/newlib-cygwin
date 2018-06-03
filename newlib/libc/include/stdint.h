@@ -458,7 +458,16 @@ typedef __uint_least64_t uint_least64_t;
 #endif
 #endif
 
-typedef int_least64_t max_align_t;
+#ifndef _GCC_MAX_ALIGN_T
+#define _GCC_MAX_ALIGN_T
+/* Type whose alignment is supported in every context and is at least
+   as great as that of any standard type not using alignment
+   specifiers.  */
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+#endif 
 
 #ifdef __cplusplus
 }
