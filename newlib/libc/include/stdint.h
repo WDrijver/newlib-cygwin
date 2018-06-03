@@ -458,6 +458,7 @@ typedef __uint_least64_t uint_least64_t;
 #endif
 #endif
 
+typedef int_least64_t max_align_t;
 
 #ifdef __cplusplus
 }
