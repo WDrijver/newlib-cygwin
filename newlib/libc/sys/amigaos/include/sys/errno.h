@@ -10,6 +10,7 @@ extern "C" {
 
 #include <sys/reent.h>
 
+#ifndef __libnix__
 #ifndef _REENT_ONLY
 #define errno (*__errno())
 #ifdef __NO_INLINE__
@@ -39,6 +40,7 @@ extern __IMPORT char *program_invocation_short_name;
 #endif
 
 #define __errno_r(ptr) ((ptr)->_errno)
+#endif // __libnix__
 
 #define	EPERM 1		/* Not owner */
 #define	ENOENT 2	/* No such file or directory */
