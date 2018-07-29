@@ -57,6 +57,8 @@ typedef struct
 typedef __stdargs int (*__compar_fn_t) (const void *, const void *);
 #endif
 
+struct _reent;
+
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
