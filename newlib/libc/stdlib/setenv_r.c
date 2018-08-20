@@ -31,6 +31,7 @@
 #include "envlock.h"
 
 extern char **environ;
+extern char ** initial_env;
 
 /* Only deal with a pointer to environ, to work around subtle bugs with shared
    libraries and/or small data systems where the user declares his own
@@ -54,7 +55,6 @@ _setenv_r (struct _reent *reent_ptr,
 	const char *value,
 	int rewrite)
 {
-  static int alloced;		/* if allocated space before */
   register char *C;
   int l_value, offset;
 
@@ -87,7 +87,7 @@ _setenv_r (struct _reent *reent_ptr,
       register char **P;
 
       for (P = *p_environ, cnt = 0; *P; ++P, ++cnt);
-      if (alloced)
+      if (environ != &initial_env)
 	{			/* just increase size */
 	  *p_environ = (char **) _realloc_r (reent_ptr, (char *) environ,
 					     (size_t) (sizeof (char *) * (cnt + 2)));
@@ -99,7 +99,6 @@ _setenv_r (struct _reent *reent_ptr,
 	}
       else
 	{			/* get new space */
-	  alloced = 1;		/* copy old entries into it */
 	  P = (char **) _malloc_r (reent_ptr, (size_t) (sizeof (char *) * (cnt + 2)));
 	  if (!P)
             {
@@ -149,9 +148,11 @@ _unsetenv_r (struct _reent *reent_ptr,
 
   while (_findenv_r (reent_ptr, name, &offset))	/* if set multiple times */
     { 
-      for (P = &(*p_environ)[offset];; ++P)
+	  P = &(*p_environ)[offset];
+	  free(*P);
+      for (;; ++P)
         if (!(*P = *(P + 1)))
-	  break;
+          break;
     }
 
   ENV_UNLOCK;

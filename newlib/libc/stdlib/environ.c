@@ -27,10 +27,28 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdlib.h>
+
 /* Provide a definition of `environ' if crt0.o doesn't.  */
 
-static char *initial_env[] = { 0 };
+char *initial_env[] = { 0 };
 
 /* Posix says `environ' is a pointer to a null terminated list of pointers.
    Hence `environ' itself is never NULL.  */
 char **environ = &initial_env[0];
+
+
+int clearenv(void) {
+	if (environ == initial_env)
+		return 0;
+
+	char ** p = environ;
+	while (*p) {
+		free(*p++);
+	}
+
+	free(environ);
+	environ = &initial_env[0];
+
+	return 0;
+}
