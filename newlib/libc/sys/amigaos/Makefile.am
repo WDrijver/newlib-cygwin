@@ -13,7 +13,8 @@ __adddf3.c  __divdf3.c  __eqdf2.c        __fixdfsi.c     __fixunssfsi.c  __float
 __addsf3.c  __divsf3.c  __eqsf2.c        __fixsfsi.c     __floatsidf.c   __floatunsisf.c  __mulsi3.c  __subdf3.c  __udivsi3.c \
 __cmpxf2.c  __divsi3.c  __extendsfdf2.c  __fixunsdfsi.c  __floatsisf.c   __muldf3.c       __negdf2.c  __subsf3.c \
 isinf.c isnan.c \
-__init_list__.c __exit_list__.c __lib_list__.c __dosbase.c __unorddf2.c __mathieeedoubbas.c __ctor_list__.c __dtor_list__.c
+__init_list__.c __exit_list__.c __lib_list__.c __dosbase.c __unorddf2.c __mathieeedoubbas.c __ctor_list__.c __dtor_list__.c \
+abort.c
 
 #syscalls.c trap.S creat.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)

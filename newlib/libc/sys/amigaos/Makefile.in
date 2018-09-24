@@ -512,6 +512,10 @@ lib_a-__dtor_list__.o: __dtor_list__.c
 lib_a-__dtor_list__.obj: __dtor_list__.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__dtor_list__.obj `if test -f '__dtor_list__.c'; then $(CYGPATH_W) '__dtor_list__.c'; else $(CYGPATH_W) '$(srcdir)/__dtor_list__.c'; fi`
 
+lib_a-abort.obj: abort.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-abort.obj `if test -f 'abort.c'; then $(CYGPATH_W) 'abort.c'; else $(CYGPATH_W) '$(srcdir)/abort.c'; fi`
+
+
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
