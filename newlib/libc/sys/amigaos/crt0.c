@@ -54,10 +54,13 @@ __entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) 
 	if (!task->pr_CLI) {
 		WaitPort(&task->pr_MsgPort);
 		__WBenchMsg = GetMsg(&task->pr_MsgPort);
+		__argv[0] = (char *)__WBenchMsg;
+		__argc = 0;
+	} else {
+		__argv[0] = __commandline;
+		__argc = 1;
 	}
 	callfuncs(&__INIT_LIST__ + 1, 0);
-	__argv[0] = __commandline;
-	__argc = 1;
 	exit(main(__argc, __argv));
 }
 

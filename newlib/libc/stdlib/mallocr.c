@@ -13,10 +13,6 @@ void *	_malloc_r (struct _reent * r, size_t sz) {
 	if (p)
 		*p++ = sz;
 
-	static int in;
-	if (!in++)
-		printf("malloc %d -> %08x\n", sz, p); fflush(stdout);
-	--in;
 	return p;
 }
 
@@ -32,19 +28,11 @@ void _free_r (struct _reent * r, void * pp) {
 	if (pp) {
 		size_t * p = (size_t*)pp;
 		size_t sz = *--p;
-		static int in;
-		if (!in++)
-			printf("free   %d -> %08x\n", sz, pp);fflush(stdout);
-		--in;
 		FreeMem(p, sz);
 	}
 }
 
 void *	_realloc_r (struct _reent * r, void * old, size_t sz) {
-	static int in;
-	if (!in++)
-		printf("realloc %d -> %08x\n", sz, old);fflush(stdout);
-	--in;
 	void * p = _malloc_r(r, sz);
 	if (p)
 	{
