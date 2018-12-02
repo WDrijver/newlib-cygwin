@@ -12,8 +12,8 @@ int __maxfh;
 
 int _open(const char *name, int flags, ...) {
 	int mode;
-	if (flags & O_RDWR) {
-		if (flags & O_CREAT)
+	if (flags & O_CREAT) {
+		if (flags & O_TRUNC)
 			mode = MODE_NEWFILE;
 		else
 			mode = MODE_READWRITE;
