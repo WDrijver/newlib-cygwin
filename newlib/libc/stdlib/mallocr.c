@@ -8,13 +8,6 @@
 
 #include <stdio.h>
 
-void *	_malloc_r (struct _reent * r, size_t sz) {
-	size_t* p = (size_t*)AllocMem(sz += 4, MEMF_ANY);
-	if (p)
-		*p++ = sz;
-
-	return p;
-}
 
 void *	_calloc_r (struct _reent * r, size_t a, size_t b) {
 	size_t sz = a * b;
@@ -22,14 +15,6 @@ void *	_calloc_r (struct _reent * r, size_t a, size_t b) {
 	if (p)
 		memset(p, 0, sz);
 	return p;
-}
-
-void _free_r (struct _reent * r, void * pp) {
-	if (pp) {
-		size_t * p = (size_t*)pp;
-		size_t sz = *--p;
-		FreeMem(p, sz);
-	}
 }
 
 void *	_realloc_r (struct _reent * r, void * old, size_t sz) {
