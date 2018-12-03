@@ -54,36 +54,49 @@ int _close(int file) {
 	return r;
 }
 
+static BPTR wbstdout;
+static int check_fno(unsigned file) {
+
+	if (file >= __maxfh)
+		return 0;
+
+	if (file < 3 && __fh[0] == 0) {
+		__fh[0] = Input();
+
+		if (__fh[0] == 0) {
+			__fh[0] = __fh[1] = __fh[2] = wbstdout = Open("*", MODE_OLDFILE);
+		} else {
+			__fh[1] = __fh[2] = Output();
+		}
+	}
+
+	return __fh[file];
+}
 
 int _write(int file, char *ptr, int len) {
-	if (file < __maxfh)
+	if (check_fno(file))
 		return Write(__fh[file], ptr, len);
 	return -1;
 }
 
 int _read(int file, char *ptr, int len) {
-	if (file < __maxfh)
+	if (check_fno(file))
 		return Read(__fh[file], ptr, len);
 	return -1;
 }
 
 
 void __init_fh() {
-	__fh = (BPTR *)malloc(4 * sizeof(BPTR));
+	__fh = (BPTR *)calloc(4, sizeof(BPTR));
 	if (!__fh)
 		exit(ENOMEM);
 
 	__maxfh = 4;
-	__fh[0] = Input();
-	__fh[1] = __fh[2] = Output();
-	__fh[3] = 0;
 }
 
 void __exit_fh() {
-	for (int i = 3; i < __maxfh; ++i) {
-		if (__fh[i])
-			Close(__fh[i]);
-	}
+	if (wbstdout)
+		Close(wbstdout);
 }
 
 int _isatty(int file) {

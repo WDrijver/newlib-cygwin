@@ -19,12 +19,12 @@ struct ExecBase * SysBase;
 static int __savedSp;
 static unsigned short cleanupflag;
 
-char * __argv[2];
+char ** __argv = {0, 0};
 int __argc;
 int __commandlen;
 void * __commandline;
 
-struct Message * __WBenchMsg;
+struct Message * _WBenchMsg;
 
 #if defined(__pic__) || defined (__PIC__)
 extern const int __bss_size;
@@ -33,7 +33,7 @@ void __restore_a4(void);
 __saveds
 #endif
 
-__entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) {
+__entrypoint __regargs void ____start(int cmdlen, void * cmdline, int sp asm("sp")) {
 #if defined(__pic__) || defined (__PIC__)
 	asm("lea ___a4_init,a4");
 	// clear bss
@@ -53,8 +53,8 @@ __entrypoint __regargs void start(int cmdlen, void * cmdline, int sp asm("sp")) 
 	struct Process * task = (struct Process *) FindTask(0);
 	if (!task->pr_CLI) {
 		WaitPort(&task->pr_MsgPort);
-		__WBenchMsg = GetMsg(&task->pr_MsgPort);
-		__argv[0] = (char *)__WBenchMsg;
+		_WBenchMsg = GetMsg(&task->pr_MsgPort);
+		__argv[0] = (char *)_WBenchMsg;
 		__argc = 0;
 	} else {
 		__argv[0] = __commandline;
@@ -82,9 +82,9 @@ __entrypoint __stdargs int exit(int rc) {
 	cleanupflag ^= -1;
 	callfuncs(&__EXIT_LIST__ + 1, -1);
 
-	if (__WBenchMsg) {
+	if (_WBenchMsg) {
 		Forbid();
-		ReplyMsg(__WBenchMsg);
+		ReplyMsg(_WBenchMsg);
 	}
 
 	asm("move.l %0,sp"::"r"(__savedSp));
@@ -185,8 +185,12 @@ void __exitcpp() {
     (*p++)();
 }
 
+extern void __nocommandline() ;
+static void (*used_commandline)() = __nocommandline;
+
 ADD2INIT(__initlibraries, -100);
 ADD2EXIT(__exitlibraries, -100);
 ADD2INIT(__initcpp, 100);
 ADD2EXIT(__exitcpp, 100);
 ALIAS(_exit, exit);
+
