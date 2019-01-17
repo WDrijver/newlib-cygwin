@@ -14,7 +14,7 @@ __addsf3.c  __divsf3.c  __eqsf2.c        __fixsfsi.c     __floatsidf.c   __float
 __cmpxf2.c  __divsi3.c  __extendsfdf2.c  __fixunsdfsi.c  __floatsisf.c   __muldf3.c       __negdf2.c  __subsf3.c \
 isinf.c isnan.c \
 __init_list__.c __exit_list__.c __lib_list__.c __dosbase.c __unorddf2.c __mathieeedoubbas.c __ctor_list__.c __dtor_list__.c \
-abort.c basename.c dirname.c __nocommandline.c \
+abort.c basename.c dirname.c __nocommandline.c uname.c \
 malloc.cpp
 
 #syscalls.c trap.S creat.c

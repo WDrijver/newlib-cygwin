@@ -93,7 +93,7 @@ am_lib_a_OBJECTS = lib_a-dummy.$(OBJEXT) lib_a-open.$(OBJEXT) \
 	lib_a-__ctor_list__.$(OBJEXT) lib_a-__dtor_list__.$(OBJEXT) \
 	lib_a-abort.$(OBJEXT) lib_a-basename.$(OBJEXT) \
 	lib_a-dirname.$(OBJEXT) lib_a-__nocommandline.$(OBJEXT) \
-	malloc.$(OBJEXT)
+	lib_a-uname.$(OBJEXT) malloc.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -129,7 +129,6 @@ CCASFLAGS = @CCASFLAGS@
 CCDEPMODE = @CCDEPMODE@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
-CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
@@ -137,7 +136,6 @@ DEPDIR = @DEPDIR@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
-EXEEXT = @EXEEXT@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -171,7 +169,6 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_CXX = @ac_ct_CXX@
 aext = @aext@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
@@ -233,7 +230,7 @@ __addsf3.c  __divsf3.c  __eqsf2.c        __fixsfsi.c     __floatsidf.c   __float
 __cmpxf2.c  __divsi3.c  __extendsfdf2.c  __fixunsdfsi.c  __floatsisf.c   __muldf3.c       __negdf2.c  __subsf3.c \
 isinf.c isnan.c \
 __init_list__.c __exit_list__.c __lib_list__.c __dosbase.c __unorddf2.c __mathieeedoubbas.c __ctor_list__.c __dtor_list__.c \
-abort.c basename.c dirname.c __nocommandline.c \
+abort.c basename.c dirname.c __nocommandline.c uname.c \
 malloc.cpp
 
 
@@ -551,6 +548,12 @@ lib_a-__nocommandline.o: __nocommandline.c
 
 lib_a-__nocommandline.obj: __nocommandline.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__nocommandline.obj `if test -f '__nocommandline.c'; then $(CYGPATH_W) '__nocommandline.c'; else $(CYGPATH_W) '$(srcdir)/__nocommandline.c'; fi`
+
+lib_a-uname.o: uname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-uname.o `test -f 'uname.c' || echo '$(srcdir)/'`uname.c
+
+lib_a-uname.obj: uname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-uname.obj `if test -f 'uname.c'; then $(CYGPATH_W) 'uname.c'; else $(CYGPATH_W) '$(srcdir)/uname.c'; fi`
 
 .cpp.o:
 	$(CXXCOMPILE) -c -o $@ $<
