@@ -224,7 +224,7 @@ typedef __uint32_t pthread_key_t;        /* thread-specific data keys */
 struct pthread_once;
 typedef struct pthread_once pthread_once_t;
 
-#define PTHREAD_ONCE_INIT       {0, -1, 0}
+#define PTHREAD_ONCE_INIT       {0, 0}
 
 #else
 typedef struct {
