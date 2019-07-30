@@ -197,13 +197,13 @@ struct __sFILE {
   /* operations */
   void *	_cookie;	/* cookie passed to io functions */
 
-  _READ_WRITE_RETURN_TYPE (*_read) (struct _reent *, void *,
+  __stdargs _READ_WRITE_RETURN_TYPE (*_read) (struct _reent *, void *,
 					   char *, _READ_WRITE_BUFSIZE_TYPE);
-  _READ_WRITE_RETURN_TYPE (*_write) (struct _reent *, void *,
+  __stdargs _READ_WRITE_RETURN_TYPE (*_write) (struct _reent *, void *,
 					    const char *,
 					    _READ_WRITE_BUFSIZE_TYPE);
-  _fpos_t (*_seek) (struct _reent *, void *, _fpos_t, int);
-  int (*_close) (struct _reent *, void *);
+  __stdargs _fpos_t (*_seek) (struct _reent *, void *, _fpos_t, int);
+  __stdargs int (*_close) (struct _reent *, void *);
 
   /* separate buffer for long sequences of ungetc() */
   struct __sbuf _ub;	/* ungetc buffer */
@@ -255,13 +255,13 @@ struct __sFILE64 {
   /* operations */
   void *	_cookie;	/* cookie passed to io functions */
 
-  _READ_WRITE_RETURN_TYPE (*_read) (struct _reent *, void *,
+  __stdargs _READ_WRITE_RETURN_TYPE (*_read) (struct _reent *, void *,
 					   char *, _READ_WRITE_BUFSIZE_TYPE);
-  _READ_WRITE_RETURN_TYPE (*_write) (struct _reent *, void *,
+  __stdargs _READ_WRITE_RETURN_TYPE (*_write) (struct _reent *, void *,
 					    const char *,
 					    _READ_WRITE_BUFSIZE_TYPE);
-  _fpos_t (*_seek) (struct _reent *, void *, _fpos_t, int);
-  int (*_close) (struct _reent *, void *);
+  __stdargs _fpos_t (*_seek) (struct _reent *, void *, _fpos_t, int);
+  __stdargs int (*_close) (struct _reent *, void *);
 
   /* separate buffer for long sequences of ungetc() */
   struct __sbuf _ub;	/* ungetc buffer */
@@ -280,7 +280,7 @@ struct __sFILE64 {
   int   _flags2;        /* for future use */
 
   _off64_t _offset;     /* current lseek offset */
-  _fpos64_t (*_seek64) (struct _reent *, void *, _fpos64_t, int);
+  __stdargs _fpos64_t (*_seek64) (struct _reent *, void *, _fpos64_t, int);
 
 #ifndef __SINGLE_THREAD__
   _flock_t _lock;	/* for thread-safety locking */
@@ -400,7 +400,7 @@ struct _reent
 
   struct _mprec *_mp;
 
-  void (*__cleanup) (struct _reent *);
+  __stdargs void (*__cleanup) (struct _reent *);
 
   int _gamma_signgam;
 
@@ -632,7 +632,7 @@ struct _reent
 
   int __sdidinit;		/* 1 means stdio has been init'd */
 
-  void (*__cleanup) (struct _reent *);
+  __stdargs void (*__cleanup) (struct _reent *);
 
   /* used by mprec routines */
   struct _Bigint *_result;
@@ -823,13 +823,13 @@ extern __FILE __sf[3];
 extern struct _reent *_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
 extern struct _reent *const _global_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
 
-void _reclaim_reent (struct _reent *);
+__stdargs void _reclaim_reent (struct _reent *);
 
 /* #define _REENT_ONLY define this to get only reentrant routines */
 
 #if defined(__DYNAMIC_REENT__) && !defined(__SINGLE_THREAD__)
 #ifndef __getreent
-  struct _reent * __getreent (void);
+  __stdargs struct _reent * __getreent (void);
 #endif
 # define _REENT (__getreent())
 #else /* __SINGLE_THREAD__ || !__DYNAMIC_REENT__ */

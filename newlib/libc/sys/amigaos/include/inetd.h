@@ -15,7 +15,7 @@
  */
 struct DaemonPort {
   struct MsgPort dp_Port;
-  void         (*dp_ExitCode)();
+  __stdargs void         (*dp_ExitCode)();
 };
 
 #define DAEMONPORTNAME "inetd.ipc"

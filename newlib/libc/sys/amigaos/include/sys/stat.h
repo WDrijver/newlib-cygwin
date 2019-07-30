@@ -177,8 +177,8 @@ __stdargs int	_stat (const char *__restrict __path, struct stat *__restrict __sb
 __stdargs int	_mkdir (const char *_path, mode_t __mode );
 #ifdef __LARGE64_FILES
 struct stat64;
-int	_stat64 (const char *__restrict __path, struct stat64 *__restrict __sbuf );
-int	_fstat64 (int __fd, struct stat64 *__sbuf );
+__stdargs int	_stat64 (const char *__restrict __path, struct stat64 *__restrict __sbuf );
+__stdargs int	_fstat64 (int __fd, struct stat64 *__sbuf );
 #endif
 #endif
 

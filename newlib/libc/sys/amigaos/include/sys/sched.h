@@ -60,7 +60,7 @@ struct sched_param {
 #endif
 };
 
-extern int sched_yield();
+extern __stdargs int sched_yield();
 
 #ifdef __cplusplus
 }

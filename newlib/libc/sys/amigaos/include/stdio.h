@@ -178,10 +178,10 @@ typedef _fpos64_t fpos64_t;
 #endif
 
 #if __POSIX_VISIBLE
-char *	ctermid (char *);
+__stdargs char *	ctermid (char *);
 #endif
 #if __XSI_VISIBLE && __XSI_VISIBLE < 600
-char *	cuserid (char *);
+__stdargs char *	cuserid (char *);
 #endif
 __stdargs FILE *	tmpfile (void);
 __stdargs char *	tmpnam (char *);
@@ -550,23 +550,23 @@ __stdargs int	fputs_unlocked (const char *__restrict, FILE *__restrict);
 
 #ifdef __LARGE64_FILES
 #if !defined(__CYGWIN__) || defined(_COMPILING_NEWLIB)
-FILE *	fdopen64 (int, const char *);
-FILE *  fopen64 (const char *, const char *);
-FILE *  freopen64 (const char *, const char *, FILE *);
-_off64_t ftello64 (FILE *);
-_off64_t fseeko64 (FILE *, _off64_t, int);
-int     fgetpos64 (FILE *, _fpos64_t *);
-int     fsetpos64 (FILE *, const _fpos64_t *);
-FILE *  tmpfile64 (void);
+__stdargs FILE *	fdopen64 (int, const char *);
+__stdargs FILE *  fopen64 (const char *, const char *);
+__stdargs FILE *  freopen64 (const char *, const char *, FILE *);
+__stdargs _off64_t ftello64 (FILE *);
+__stdargs _off64_t fseeko64 (FILE *, _off64_t, int);
+__stdargs int     fgetpos64 (FILE *, _fpos64_t *);
+__stdargs int     fsetpos64 (FILE *, const _fpos64_t *);
+__stdargs FILE *  tmpfile64 (void);
 
-FILE *	_fdopen64_r (struct _reent *, int, const char *);
-FILE *  _fopen64_r (struct _reent *,const char *, const char *);
-FILE *  _freopen64_r (struct _reent *, const char *, const char *, FILE *);
-_off64_t _ftello64_r (struct _reent *, FILE *);
-_off64_t _fseeko64_r (struct _reent *, FILE *, _off64_t, int);
-int     _fgetpos64_r (struct _reent *, FILE *, _fpos64_t *);
-int     _fsetpos64_r (struct _reent *, FILE *, const _fpos64_t *);
-FILE *  _tmpfile64_r (struct _reent *);
+__stdargs FILE *	_fdopen64_r (struct _reent *, int, const char *);
+__stdargs FILE *  _fopen64_r (struct _reent *,const char *, const char *);
+__stdargs FILE *  _freopen64_r (struct _reent *, const char *, const char *, FILE *);
+__stdargs _off64_t _ftello64_r (struct _reent *, FILE *);
+__stdargs _off64_t _fseeko64_r (struct _reent *, FILE *, _off64_t, int);
+__stdargs int     _fgetpos64_r (struct _reent *, FILE *, _fpos64_t *);
+__stdargs int     _fsetpos64_r (struct _reent *, FILE *, const _fpos64_t *);
+__stdargs FILE *  _tmpfile64_r (struct _reent *);
 #endif /* !__CYGWIN__ */
 #endif /* __LARGE64_FILES */
 
@@ -583,20 +583,20 @@ __stdargs int	__swbuf_r (struct _reent *, int, FILE *);
 
 #if __BSD_VISIBLE
 # ifdef __LARGE64_FILES
-FILE	*funopen (const void *__cookie,
-		int (*__readfn)(void *__c, char *__buf,
+__stdargs FILE	*funopen (const void *__cookie,
+		__stdargs int (*__readfn)(void *__c, char *__buf,
 				_READ_WRITE_BUFSIZE_TYPE __n),
-		int (*__writefn)(void *__c, const char *__buf,
+		__stdargs int (*__writefn)(void *__c, const char *__buf,
 				 _READ_WRITE_BUFSIZE_TYPE __n),
-		_fpos64_t (*__seekfn)(void *__c, _fpos64_t __off, int __whence),
-		int (*__closefn)(void *__c));
-FILE	*_funopen_r (struct _reent *, const void *__cookie,
-		int (*__readfn)(void *__c, char *__buf,
+		__stdargs _fpos64_t (*__seekfn)(void *__c, _fpos64_t __off, int __whence),
+		__stdargs int (*__closefn)(void *__c));
+__stdargs FILE	*_funopen_r (struct _reent *, const void *__cookie,
+		__stdargs int (*__readfn)(void *__c, char *__buf,
 				_READ_WRITE_BUFSIZE_TYPE __n),
-		int (*__writefn)(void *__c, const char *__buf,
+		__stdargs int (*__writefn)(void *__c, const char *__buf,
 				 _READ_WRITE_BUFSIZE_TYPE __n),
-		_fpos64_t (*__seekfn)(void *__c, _fpos64_t __off, int __whence),
-		int (*__closefn)(void *__c));
+		__stdargs _fpos64_t (*__seekfn)(void *__c, _fpos64_t __off, int __whence),
+		__stdargs int (*__closefn)(void *__c));
 # else
 __stdargs FILE	*funopen (const void *__cookie,
 		__stdargs int (*__readfn)(void *__cookie, char *__buf,

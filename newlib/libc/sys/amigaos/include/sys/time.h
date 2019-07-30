@@ -268,30 +268,30 @@ struct itimerval {
 #include <time.h>
 
 __BEGIN_DECLS
-int utimes (const char *__path, const struct timeval *__tvp);
+__stdargs int utimes (const char *__path, const struct timeval *__tvp);
 
 #if __BSD_VISIBLE
-int adjtime (const struct timeval *, struct timeval *);
-int futimes (int, const struct timeval *);
-int lutimes (const char *, const struct timeval *);
-int settimeofday (const struct timeval *, const struct timezone *);
+__stdargs __stdargs int adjtime (const struct timeval *, struct timeval *);
+__stdargs int futimes (int, const struct timeval *);
+__stdargs int lutimes (const char *, const struct timeval *);
+__stdargs int settimeofday (const struct timeval *, const struct timezone *);
 #endif
 
 #if __MISC_VISIBLE || __XSI_VISIBLE
-int getitimer (int __which, struct itimerval *__value);
-int setitimer (int __which, const struct itimerval *__restrict __value,
+__stdargs int getitimer (int __which, struct itimerval *__value);
+__stdargs int setitimer (int __which, const struct itimerval *__restrict __value,
 					struct itimerval *__restrict __ovalue);
 #endif
 
-int gettimeofday (struct timeval *__restrict __p,
+__stdargs int gettimeofday (struct timeval *__restrict __p,
 			  struct timezone *__restrict __tz);
 
 #if __GNU_VISIBLE
-int futimesat (int, const char *, const struct timeval [2]);
+__stdargs int futimesat (int, const char *, const struct timeval [2]);
 #endif
 
 #ifdef _COMPILING_NEWLIB
-int _gettimeofday (struct timeval *__p, void *__tz);
+__stdargs int _gettimeofday (struct timeval *__p, void *__tz);
 #endif
 
 __END_DECLS
