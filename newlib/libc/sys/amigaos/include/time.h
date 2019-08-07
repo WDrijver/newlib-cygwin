@@ -151,11 +151,11 @@ __stdargs int		getdate_r (const char *, struct tm *);
 
 /* defines for the opengroup specifications Derived from Issue 1 of the SVID.  */
 #if __SVID_VISIBLE || __XSI_VISIBLE
-extern __stdargs __IMPORT long _timezone;
-extern __stdargs __IMPORT int _daylight;
+extern __IMPORT long _timezone;
+extern __IMPORT int _daylight;
 #endif
 #if __POSIX_VISIBLE
-extern __stdargs __IMPORT char *_tzname[2];
+extern __IMPORT char *_tzname[2];
 
 /* POSIX defines the external tzname being defined in time.h */
 #ifndef tzname
