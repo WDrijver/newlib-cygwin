@@ -15,6 +15,7 @@
 #define __need_NULL
 #include <stddef.h>
 #include <errno.h>
+#include <sys/_types.h>
 #include <sys/reent.h>
 #include <sys/cdefs.h>
 #include <machine/stdlib.h>
