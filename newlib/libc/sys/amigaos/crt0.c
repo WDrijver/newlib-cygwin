@@ -76,8 +76,8 @@ __saveds
  * Call cleanup before restoring the stack and setting the return code.
  */
 __entrypoint __stdargs int exit(int rc) {
-	register unsigned __d6 __asm("d6");
-	asm("move.l %0,d6"::"r"(rc));
+	register unsigned __d7 __asm("d7");
+	asm("move.l %0,d7"::"r"(rc));
 
 	cleanupflag ^= -1;
 	callfuncs(&__EXIT_LIST__ + 1, -1);
@@ -88,7 +88,7 @@ __entrypoint __stdargs int exit(int rc) {
 	}
 
 	asm("move.l %0,sp"::"r"(__savedSp));
-	return __d6;
+	return __d7;
 }
 
 /**
