@@ -49,13 +49,12 @@ typedef	_TIME_T_	time_t;
 /*
  * Structure returned by gettimeofday(2) system call, and used in other calls.
  */
-#if 0
 struct timeval {
 	time_t		tv_sec;		/* seconds */
 	suseconds_t	tv_usec;	/* and microseconds */
 };
-#endif
-#include <devices/timer.h>
+#define tv_secs tv_sec
+#define tv_micro tv_usecZ
 
 #if __BSD_VISIBLE
 #ifndef _KERNEL			/* NetBSD/OpenBSD compatible interfaces */
