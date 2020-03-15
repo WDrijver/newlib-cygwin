@@ -54,7 +54,7 @@ struct timeval {
 	suseconds_t	tv_usec;	/* and microseconds */
 };
 #define tv_secs tv_sec
-#define tv_micro tv_usecZ
+#define tv_micro tv_usec
 
 #if __BSD_VISIBLE
 #ifndef _KERNEL			/* NetBSD/OpenBSD compatible interfaces */
