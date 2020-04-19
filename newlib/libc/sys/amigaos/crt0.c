@@ -27,7 +27,7 @@ void * __commandline;
 struct Message * _WBenchMsg;
 
 #if defined(__pic__) || defined (__PIC__)
-extern const int __bss_size;
+extern const int ___bss_init_size;
 extern int _edata;
 void __restore_a4(void);
 __saveds
@@ -38,7 +38,7 @@ __entrypoint __regargs void ____start(int cmdlen, void * cmdline, int sp asm("sp
 	asm("lea ___a4_init,a4");
 	// clear bss
 	int * p = &_edata;
-	for (unsigned sz = __bss_size;sz;--sz)
+	for (unsigned sz = ___bss_init_size;sz;--sz)
 	*p++ = 0;
 
 #endif
