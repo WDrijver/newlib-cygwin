@@ -1,12 +1,24 @@
 #ifndef _HEADERS_STABS_H
 #define _HEADERS_STABS_H
 
-/* These are some macros for handling of symboltable information
- */
+#ifdef __m68k_elf__
 
-/* linker can use symbol b for symbol a if a is not defined */
-#define ALIAS(a,b) asm(".stabs \"_" #a "\",11,0,0,0;.stabs \"_" #b "\",1,0,0,0")
+/* add symbol a to list b (c unused) */
+#define ADD2LIST(a,b,c) \
+	asm(".section\t.list_" #b ",\"aw\""); \
+	asm("\t.long _" #a);
 
+#define ADD2LIST2(a,b,c) \
+	asm(".section\t.list_" #b ",\"aw\""); \
+	asm("\t.long " #a);
+
+/* Install private constructors and destructors pri MUST be -127<=pri<=127 */
+#define ADD2INIT(a,pri) ADD2LIST(a,__INIT_LIST__,22); \
+                        ADD2LIST2(pri+128,__INIT_LIST__,22)
+#define ADD2EXIT(a,pri) ADD2LIST(a,__EXIT_LIST__,22); \
+                        ADD2LIST2(pri+128,__EXIT_LIST__,22)
+
+#else
 /* add symbol a to list b (type c (22=text 24=data 26=bss)) */
 #define ADD2LIST(a,b,c) asm(".stabs \"_" #b "\"," #c ",0,0,_" #a )
 
@@ -15,6 +27,15 @@
                         asm(".stabs \"___INIT_LIST__\",20,0,0," #pri "+128")
 #define ADD2EXIT(a,pri) ADD2LIST(a,__EXIT_LIST__,22); \
                         asm(".stabs \"___EXIT_LIST__\",20,0,0," #pri "+128")
+
+#endif
+
+/* These are some macros for handling of symboltable information
+ */
+
+/* linker can use symbol b for symbol a if a is not defined */
+#define ALIAS(a,b) asm(".stabs \"_" #a "\",11,0,0,0;.stabs \"_" #b "\",1,0,0,0")
+
 
 /* Add to library list */
 #define ADD2LIB(a) ADD2LIST(a,__LIB_LIST__,24)
