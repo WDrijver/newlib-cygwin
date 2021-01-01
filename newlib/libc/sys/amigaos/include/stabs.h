@@ -1,7 +1,7 @@
 #ifndef _HEADERS_STABS_H
 #define _HEADERS_STABS_H
 
-#ifdef __m68k_elf__
+#if defined(__m68k_elf__) || defined(__ELF__)
 
 /* add symbol a to list b (c unused) */
 #define ADD2LIST(a,b,c) \
