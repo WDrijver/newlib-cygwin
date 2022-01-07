@@ -139,6 +139,8 @@ __truncxfdf2 (long double ld)
   return dl.d;
 }
 
+extern int __cmpdf2 (double x1, double x2);
+
 long
 __cmpxf2 (long double x1, long double x2)
 {
