@@ -52,7 +52,7 @@ QUICKREF
 #include <stdlib.h>
 #include <reent.h>
 
-char *
+const char *
 strsignal (int signal)
 {
   char *buffer;
