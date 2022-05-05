@@ -1,16 +1,19 @@
 #ifndef _HEADERS_STABS_H
 #define _HEADERS_STABS_H
 
-#if defined(__m68k_elf__) || defined(__ELF__)
+#if defined(__m68k_elf__) || defined(__ELF__) || defined(__libnix__)
 
 /* add symbol a to list b (c unused) */
 #define ADD2LIST(a,b,c) \
 	asm(".section\t.list_" #b ",\"aw\""); \
-	asm("\t.long _" #a);
+	asm("\t.long _" #a); \
+	asm(".text");
+
 
 #define ADD2LIST2(a,b,c) \
 	asm(".section\t.list_" #b ",\"aw\""); \
-	asm("\t.long " #a);
+	asm("\t.long " #a); \
+	asm(".text");
 
 /* Install private constructors and destructors pri MUST be -127<=pri<=127 */
 #define ADD2INIT(a,pri) ADD2LIST(a,__INIT_LIST__,22); \
