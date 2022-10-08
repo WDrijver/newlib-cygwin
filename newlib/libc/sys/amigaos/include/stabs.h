@@ -1,7 +1,7 @@
 #ifndef _HEADERS_STABS_H
 #define _HEADERS_STABS_H
 
-#if defined(__m68k_elf__) || defined(__ELF__) || defined(__libnix__)
+#if defined(__m68k_elf__) || defined(__ELF__) || 1
 
 /* add symbol a to list b (c unused) */
 #define ADD2LIST(a,b,c) \
@@ -22,14 +22,20 @@
                         ADD2LIST2(pri+128,__EXIT_LIST__,22)
 
 #else
-/* add symbol a to list b (type c (22=text 24=data 26=bss)) */
+/* add symbol a to list b (type c (20=abs 22=text 24=data 26=bss))
+ *
+#define	N_SETA	0x14		// Absolute set element symbol.
+#define	N_SETT	0x16		// Text set element symbol.
+#define	N_SETD	0x18		// Data set element symbol.
+#define	N_SETB	0x1A		// Bss set element symbol.
+ *  */
 #define ADD2LIST(a,b,c) asm(".stabs \"_" #b "\"," #c ",0,0,_" #a )
 
 /* Install private constructors and destructors pri MUST be -127<=pri<=127 */
 #define ADD2INIT(a,pri) ADD2LIST(a,__INIT_LIST__,22); \
-                        asm(".stabs \"___INIT_LIST__\",20,0,0," #pri "+128")
+                        asm(".stabs \"___INIT_LIST__\",22,0,0," #pri "+128")
 #define ADD2EXIT(a,pri) ADD2LIST(a,__EXIT_LIST__,22); \
-                        asm(".stabs \"___EXIT_LIST__\",20,0,0," #pri "+128")
+                        asm(".stabs \"___EXIT_LIST__\",22,0,0," #pri "+128")
 
 #endif
 
@@ -40,7 +46,7 @@
 #define ALIAS(a,b) asm(".stabs \"_" #a "\",11,0,0,0;.stabs \"_" #b "\",1,0,0,0")
 
 
-/* Add to library list */
+/* Add to library list - must be in data*/
 #define ADD2LIB(a) ADD2LIST(a,__LIB_LIST__,24)
 
 /* This one does not really handle symbol tables
