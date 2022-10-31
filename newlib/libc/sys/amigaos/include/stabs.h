@@ -3,15 +3,22 @@
 
 #if defined(__m68k_elf__) || defined(__ELF__) || defined(__libnix__)
 
-/* add symbol a to list b (c unused) */
-#define ADD2LIST(a,b,c) \
-	asm(".section\t.list_" #b ",\"aw\""); \
-	asm("\t.long _" #a); \
-	asm(".text");
+#define __PASTE(a,b) a##b
 
+#define ADD2LIST(a,b,c) \
+	__PASTE(ADD2LIST,c)(_##a,b)
 
 #define ADD2LIST2(a,b,c) \
+	__PASTE(ADD2LIST,c)(a,b)
+
+/* add symbol a to list b */
+#define ADD2LIST22(a,b) \
 	asm(".section\t.list_" #b ",\"aw\""); \
+	asm("\t.long " #a); \
+	asm(".text");
+
+#define ADD2LIST24(a,b) \
+	asm(".section\t.dlist_" #b ",\"aw\""); \
 	asm("\t.long " #a); \
 	asm(".text");
 
@@ -20,6 +27,8 @@
                         ADD2LIST2(pri+128,__INIT_LIST__,22)
 #define ADD2EXIT(a,pri) ADD2LIST(a,__EXIT_LIST__,22); \
                         ADD2LIST2(pri+128,__EXIT_LIST__,22)
+
+#define ADDTABL_END() ADD2LIST2(-1,__FuncTable__,22)
 
 #else
 /* add symbol a to list b (type c (22=text 24=data 26=bss)) */
@@ -30,6 +39,8 @@
                         asm(".stabs \"___INIT_LIST__\",20,0,0," #pri "+128")
 #define ADD2EXIT(a,pri) ADD2LIST(a,__EXIT_LIST__,22); \
                         asm(".stabs \"___EXIT_LIST__\",20,0,0," #pri "+128")
+
+#define ADDTABL_END() asm(".stabs \"___FuncTable__\",20,0,0,-1")
 
 #endif
 
@@ -121,6 +132,6 @@ _ADDTABL_ARG(arg1);			\
 _ADDTABL_CALL(name);			\
 _ADDTABL_ENDN(name,4)
 
-#define ADDTABL_END() asm(".stabs \"___FuncTable__\",20,0,0,-1")
+
 
 #endif /* _HEADERS_STABS_H */
