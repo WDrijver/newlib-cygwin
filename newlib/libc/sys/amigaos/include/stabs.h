@@ -1,7 +1,7 @@
 #ifndef _HEADERS_STABS_H
 #define _HEADERS_STABS_H
 
-#if defined(__m68k_elf__) || defined(__ELF__) || defined(__libnix__)
+#if defined(__m68k_elf__) || defined(__ELF__) || (defined(__near) && defined(__chip) && defined(__fast))
 
 #define __PASTE(a,b) a##b
 
