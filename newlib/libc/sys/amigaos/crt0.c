@@ -10,8 +10,12 @@ extern __stdargs int main(int, char **);
 extern __stdargs void perror(const char *string);
 
 extern struct Library * DOSBase;
-extern int __INIT_LIST__;
-extern int __EXIT_LIST__;
+
+__attribute__((section(".list___INIT_LISA__")))
+int __INIT_LIST__[1] = {0};
+__attribute__((section(".list___EXIT_LISA__")))
+int __EXIT_LIST__[1] = {0};
+
 __entrypoint __stdargs int exit(int);
 __entrypoint void callfuncs(int * p asm("a2"), unsigned short prioo asm("d2"));
 
@@ -60,7 +64,7 @@ __entrypoint __regargs void ____start(int cmdlen, void * cmdline, int sp asm("sp
 		__argv[0] = __commandline;
 		__argc = 1;
 	}
-	callfuncs(&__INIT_LIST__ + 1, 0);
+	callfuncs(&__INIT_LIST__[0] + 1, 0);
 	exit(main(__argc, __argv));
 }
 
@@ -80,7 +84,7 @@ __entrypoint __stdargs int exit(int rc) {
 	asm("move.l %0,d7"::"r"(rc));
 
 	cleanupflag ^= -1;
-	callfuncs(&__EXIT_LIST__ + 1, -1);
+	callfuncs(&__EXIT_LIST__[0] + 1, -1);
 
 	if (_WBenchMsg) {
 		Forbid();
@@ -123,28 +127,26 @@ __entrypoint void callfuncs(int * q asm("a2"), unsigned short order asm("d2")) {
 }
 
 /* These are the elements pointed to by __LIB_LIST__ */
-extern struct lib {
-	struct Library *base;
-	char *name;
-}*__LIB_LIST__[];
+__attribute__((section(".dlist___LIB_LIST__")))
+long __LIB_LIST__ = 0;
+__attribute__((section(".dlist___LIB_LISZ__")))
+long __ZLIB = 0;
 
 /**
  * Open all libraries.
  */
 void __initlibraries(void) {
-	struct lib **list = __LIB_LIST__;
-	ULONG numbases = (ULONG) *list++;
-
-	while (numbases) {
-		struct lib *l = *list++;
-		if ((l->base = OpenLibrary(l->name, 0)) == 0) {
+	long * l = &__LIB_LIST__ + 1;
+	while (*l) {
+		long * base = l++;
+		char const * const name = *(char **) (l++);
+		if ((*base = (long)OpenLibrary(name, 0)) == 0) {
 			if (DOSBase) {
 				fputs(2, "can't open library:");
-				fputs(2, l->name);
+				fputs(2, name);
 			}
 			exit(1);
 		}
-		--numbases;
 	}
 }
 
@@ -152,24 +154,25 @@ void __initlibraries(void) {
  * close all opened libraries.
  */
 void __exitlibraries(void) {
-	struct lib **list = __LIB_LIST__;
-	ULONG numbases = (ULONG) *list++;
-
-	while (numbases) {
-		struct lib *l = *list++;
-		struct Library *lb = l->base;
-		if (lb != 0) {
-			/* l->base=NULL; */
-			CloseLibrary(lb);
+	long * l = &__LIB_LIST__ + 1;
+	while (*l) {
+		long * base = l++;
+		if (*base != 0) {
+			CloseLibrary((struct Library *)*base);
 		}
-		--numbases;
+		++l;
 	}
 }
 
 typedef void (*func_ptr) (void);
 
-extern func_ptr __CTOR_LIST__[];
-extern func_ptr __DTOR_LIST__[];
+__attribute__((section(".list___CTOR_LISA__")))
+func_ptr __CTOR_LIST__[] = {0};
+__attribute__((section(".list___DTOR_LISA__")))
+func_ptr __DTOR_LIST__[] = {0};
+__attribute__((section(".list___ZZZZ__")))
+func_ptr __ZZZZ__[] = {0};
+
 
 void __initcpp() {
   func_ptr *p0 = __CTOR_LIST__ + 1;

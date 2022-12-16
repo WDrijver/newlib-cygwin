@@ -1,3 +1,3 @@
 #include <stabs.h>
-void *DOSBase[2] = { 0l, "dos.library" };
-ADD2LIB(DOSBase);
+__attribute__((section(".dlist___LIB_LIST__")))
+void* DOSBase[2] = { (void*)-1, "dos.library" };
