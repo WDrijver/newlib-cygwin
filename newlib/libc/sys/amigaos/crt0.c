@@ -2,19 +2,24 @@
  * Based on nrct0.s from libnix
  */
 #include <exec/exec.h>
+#include <proto/dos.h>
 #include <dos/dosextens.h>
 #include <inline/exec.h>
+#include <string.h>
 #include <stabs.h>
 
 extern __stdargs int main(int, char **);
 extern __stdargs void perror(const char *string);
 
-extern struct Library * DOSBase;
-
-__attribute__((section(".list___INIT_LISA__")))
+__attribute__((section(".list___INIT_LIST__")))
 int __INIT_LIST__[1] = {0};
-__attribute__((section(".list___EXIT_LISA__")))
+__attribute__((section(".list___EXIT_LIST__")))
 int __EXIT_LIST__[1] = {0};
+
+__attribute__((section(".end_of_lists")))
+int __ZZZ_LIST__[1] = {0};
+__attribute__((section(".end_of_dlists")))
+int __ZZZ_DLIST__[1] = {0};
 
 __entrypoint __stdargs int exit(int);
 __entrypoint void callfuncs(int * p asm("a2"), unsigned short prioo asm("d2"));
@@ -79,6 +84,9 @@ __saveds
  * The exit function.
  * Call cleanup before restoring the stack and setting the return code.
  */
+;
+asm("___exit: .globl ___exit");
+
 __entrypoint __stdargs int exit(int rc) {
 	register unsigned __d7 __asm("d7");
 	asm("move.l %0,d7"::"r"(rc));
@@ -129,8 +137,18 @@ __entrypoint void callfuncs(int * q asm("a2"), unsigned short order asm("d2")) {
 /* These are the elements pointed to by __LIB_LIST__ */
 __attribute__((section(".dlist___LIB_LIST__")))
 long __LIB_LIST__ = 0;
-__attribute__((section(".dlist___LIB_LISZ__")))
-long __ZLIB = 0;
+
+#pragma GCC push_options
+#pragma GCC optimize ("-O2")
+
+static __attribute__((noreturn)) void __openliberror(char const * name) {
+	char buf[80];
+
+	strcpy(buf, name);
+	strcat(buf, " failed to load\n");
+	Write(Output(), buf, strlen(buf));
+	exit(20);
+}
 
 /**
  * Open all libraries.
@@ -140,12 +158,10 @@ void __initlibraries(void) {
 	while (*l) {
 		long * base = l++;
 		char const * const name = *(char **) (l++);
-		if ((*base = (long)OpenLibrary(name, 0)) == 0) {
-			if (DOSBase) {
-				fputs(2, "can't open library:");
-				fputs(2, name);
-			}
-			exit(1);
+		*base = (long)(strstr(name, ".resource") ? OpenResource(name) : OldOpenLibrary(name));
+		if (!*base) {
+ 		  __openliberror(name);
+ 		  break;
 		}
 	}
 }
@@ -157,22 +173,18 @@ void __exitlibraries(void) {
 	long * l = &__LIB_LIST__ + 1;
 	while (*l) {
 		long * base = l++;
-		if (*base != 0) {
+		char const * const name = *(char **) (l++);
+		if (!strstr(name, ".resource"))
 			CloseLibrary((struct Library *)*base);
-		}
-		++l;
 	}
 }
 
 typedef void (*func_ptr) (void);
 
-__attribute__((section(".list___CTOR_LISA__")))
+__attribute__((section(".list___CTOR_LIST__")))
 func_ptr __CTOR_LIST__[] = {0};
-__attribute__((section(".list___DTOR_LISA__")))
+__attribute__((section(".list___DTOR_LIST__")))
 func_ptr __DTOR_LIST__[] = {0};
-__attribute__((section(".list___ZZZZ__")))
-func_ptr __ZZZZ__[] = {0};
-
 
 void __initcpp() {
   func_ptr *p0 = __CTOR_LIST__ + 1;
@@ -195,5 +207,4 @@ ADD2INIT(__initlibraries, -100);
 ADD2EXIT(__exitlibraries, -100);
 ADD2INIT(__initcpp, 100);
 ADD2EXIT(__exitcpp, 100);
-ALIAS(_exit, exit);
 

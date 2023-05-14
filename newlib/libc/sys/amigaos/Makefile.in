@@ -86,11 +86,9 @@ am_lib_a_OBJECTS = lib_a-dummy.$(OBJEXT) lib_a-open.$(OBJEXT) \
 	lib_a-__fixunsdfsi.$(OBJEXT) lib_a-__floatsisf.$(OBJEXT) \
 	lib_a-__muldf3.$(OBJEXT) lib_a-__negdf2.$(OBJEXT) \
 	lib_a-__subsf3.$(OBJEXT) lib_a-isinf.$(OBJEXT) \
-	lib_a-isnan.$(OBJEXT) lib_a-__init_list__.$(OBJEXT) \
-	lib_a-__exit_list__.$(OBJEXT) lib_a-__lib_list__.$(OBJEXT) \
+	lib_a-isnan.$(OBJEXT) lib_a-cxxglue.$(OBJEXT) \
 	lib_a-__dosbase.$(OBJEXT) lib_a-__unorddf2.$(OBJEXT) \
 	lib_a-__mathieeedoubbas.$(OBJEXT) \
-	lib_a-__ctor_list__.$(OBJEXT) lib_a-__dtor_list__.$(OBJEXT) \
 	lib_a-abort.$(OBJEXT) lib_a-basename.$(OBJEXT) \
 	lib_a-dirname.$(OBJEXT) lib_a-__nocommandline.$(OBJEXT) \
 	lib_a-uname.$(OBJEXT) malloc.$(OBJEXT) \
@@ -230,7 +228,7 @@ __adddf3.c  __divdf3.c  __eqdf2.c        __fixdfsi.c     __fixunssfsi.c  __float
 __addsf3.c  __divsf3.c  __eqsf2.c        __fixsfsi.c     __floatsidf.c   __floatunsisf.c  __mulsi3.c  __subdf3.c  __udivsi3.c \
 __cmpxf2.c  __divsi3.c  __extendsfdf2.c  __fixunsdfsi.c  __floatsisf.c   __muldf3.c       __negdf2.c  __subsf3.c \
 isinf.c isnan.c \
-__init_list__.c __exit_list__.c __lib_list__.c __dosbase.c __unorddf2.c __mathieeedoubbas.c __ctor_list__.c __dtor_list__.c \
+__dosbase.c __unorddf2.c __mathieeedoubbas.c cxxglue.c \
 abort.c basename.c dirname.c __nocommandline.c uname.c \
 malloc.cpp clock.c
 
@@ -478,23 +476,11 @@ lib_a-isnan.o: isnan.c
 lib_a-isnan.obj: isnan.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-isnan.obj `if test -f 'isnan.c'; then $(CYGPATH_W) 'isnan.c'; else $(CYGPATH_W) '$(srcdir)/isnan.c'; fi`
 
-lib_a-__init_list__.o: __init_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__init_list__.o `test -f '__init_list__.c' || echo '$(srcdir)/'`__init_list__.c
+lib_a-cxxglue.o: cxxglue.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-cxxglue.o `if test -f 'cxxglue.c'; then $(CYGPATH_W) 'cxxglue.c'; else $(CYGPATH_W) '$(srcdir)/cxxglue.c'; fi`
 
-lib_a-__init_list__.obj: __init_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__init_list__.obj `if test -f '__init_list__.c'; then $(CYGPATH_W) '__init_list__.c'; else $(CYGPATH_W) '$(srcdir)/__init_list__.c'; fi`
-
-lib_a-__exit_list__.o: __exit_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__exit_list__.o `test -f '__exit_list__.c' || echo '$(srcdir)/'`__exit_list__.c
-
-lib_a-__exit_list__.obj: __exit_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__exit_list__.obj `if test -f '__exit_list__.c'; then $(CYGPATH_W) '__exit_list__.c'; else $(CYGPATH_W) '$(srcdir)/__exit_list__.c'; fi`
-
-lib_a-__lib_list__.o: __lib_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__lib_list__.o `test -f '__lib_list__.c' || echo '$(srcdir)/'`__lib_list__.c
-
-lib_a-__lib_list__.obj: __lib_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__lib_list__.obj `if test -f '__lib_list__.c'; then $(CYGPATH_W) '__lib_list__.c'; else $(CYGPATH_W) '$(srcdir)/__lib_list__.c'; fi`
+lib_a-cxxglue.obj: cxxglue.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-cxxglue.obj `if test -f 'cxxglue.c'; then $(CYGPATH_W) 'cxxglue.c'; else $(CYGPATH_W) '$(srcdir)/cxxglue.c'; fi`
 
 lib_a-__dosbase.o: __dosbase.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__dosbase.o `test -f '__dosbase.c' || echo '$(srcdir)/'`__dosbase.c
@@ -513,18 +499,6 @@ lib_a-__mathieeedoubbas.o: __mathieeedoubbas.c
 
 lib_a-__mathieeedoubbas.obj: __mathieeedoubbas.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__mathieeedoubbas.obj `if test -f '__mathieeedoubbas.c'; then $(CYGPATH_W) '__mathieeedoubbas.c'; else $(CYGPATH_W) '$(srcdir)/__mathieeedoubbas.c'; fi`
-
-lib_a-__ctor_list__.o: __ctor_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__ctor_list__.o `test -f '__ctor_list__.c' || echo '$(srcdir)/'`__ctor_list__.c
-
-lib_a-__ctor_list__.obj: __ctor_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__ctor_list__.obj `if test -f '__ctor_list__.c'; then $(CYGPATH_W) '__ctor_list__.c'; else $(CYGPATH_W) '$(srcdir)/__ctor_list__.c'; fi`
-
-lib_a-__dtor_list__.o: __dtor_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__dtor_list__.o `test -f '__dtor_list__.c' || echo '$(srcdir)/'`__dtor_list__.c
-
-lib_a-__dtor_list__.obj: __dtor_list__.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-__dtor_list__.obj `if test -f '__dtor_list__.c'; then $(CYGPATH_W) '__dtor_list__.c'; else $(CYGPATH_W) '$(srcdir)/__dtor_list__.c'; fi`
 
 lib_a-abort.o: abort.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-abort.o `test -f 'abort.c' || echo '$(srcdir)/'`abort.c
