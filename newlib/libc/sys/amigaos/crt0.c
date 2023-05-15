@@ -8,6 +8,9 @@
 #include <string.h>
 #include <stabs.h>
 
+#pragma GCC push_options
+#pragma GCC optimize ("no-toplevel-reorder")
+
 extern __stdargs int main(int, char **);
 extern __stdargs void perror(const char *string);
 
@@ -84,7 +87,6 @@ __saveds
  * The exit function.
  * Call cleanup before restoring the stack and setting the return code.
  */
-;
 asm("___exit: .globl ___exit");
 
 __entrypoint __stdargs int exit(int rc) {
