@@ -80,7 +80,6 @@ __entrypoint __regargs void ____start(int cmdlen, void * cmdline, int sp asm("sp
 void __entrypoint __restore_a4(void) {
 	asm("lea ___a4_init,a4");
 }
-__saveds
 #endif
 
 /**
@@ -88,7 +87,9 @@ __saveds
  * Call cleanup before restoring the stack and setting the return code.
  */
 asm("___exit: .globl ___exit");
-
+#if defined(__pic__) || defined (__PIC__)
+__saveds
+#endif
 __entrypoint __stdargs int exit(int rc) {
 	register unsigned __d7 __asm("d7");
 	asm("move.l %0,d7"::"r"(rc));
