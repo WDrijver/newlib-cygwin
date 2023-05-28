@@ -7,6 +7,10 @@
 
 #ifndef _REENT_ONLY
 
+#ifndef __stdargs
+#define __stdargs
+#endif
+
 __stdargs int *
 __errno ()
 {

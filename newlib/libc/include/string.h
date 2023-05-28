@@ -131,7 +131,7 @@ char	*strupr (char *);
 #endif
 
 #ifndef DEFS_H	/* Kludge to work around problem compiling in gdb */
-char	*strsignal (int __signo);
+const char	*strsignal (int __signo);
 #endif
 
 #ifdef __CYGWIN__
