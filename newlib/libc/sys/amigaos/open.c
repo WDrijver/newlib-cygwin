@@ -7,9 +7,12 @@
 #include <inline/dos.h>
 #include <stabs.h>
 
+#pragma GCC optimize ("no-toplevel-reorder")
+
 BPTR * __fh;
 int __maxfh;
 
+asm("_open: .globl _open");
 int _open(const char *name, int flags, ...) {
 	int mode;
 	if (flags & O_CREAT) {
@@ -45,6 +48,7 @@ int _open(const char *name, int flags, ...) {
 	return fh;
 }
 
+asm("_close: .globl _close");
 int _close(int file) {
 	int r = -1;
 	if (file < __maxfh) {
@@ -73,12 +77,14 @@ static int check_fno(unsigned file) {
 	return __fh[file];
 }
 
+asm("_write: .globl _write");
 int _write(int file, char *ptr, int len) {
 	if (check_fno(file))
 		return Write(__fh[file], ptr, len);
 	return -1;
 }
 
+asm("_read: .globl _read");
 int _read(int file, char *ptr, int len) {
 	if (check_fno(file))
 		return Read(__fh[file], ptr, len);
@@ -106,5 +112,3 @@ int _isatty(int file) {
 ADD2INIT(__init_fh, -50);
 ADD2EXIT(__exit_fh, -50);
 
-ALIAS(write, _write);
-ALIAS(read, _read);
