@@ -87,6 +87,7 @@ void __entrypoint __restore_a4(void) {
  * Call cleanup before restoring the stack and setting the return code.
  */
 asm("___exit: .globl ___exit");
+asm("__exit: .globl __exit");
 #if defined(__pic__) || defined (__PIC__)
 __saveds
 #endif
