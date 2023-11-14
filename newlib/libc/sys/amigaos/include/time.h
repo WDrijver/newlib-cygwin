@@ -151,6 +151,9 @@ __stdargs int		getdate_r (const char *, struct tm *);
 
 extern long timezone;
 extern int daylight;
+#define _timezone timezone
+#define _daylight daylight
+
 #if __POSIX_VISIBLE
 extern __IMPORT char *_tzname[2];
 
