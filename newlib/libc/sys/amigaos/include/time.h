@@ -19,7 +19,7 @@
 #include <machine/time.h>
 
 #ifndef _CLOCKS_PER_SEC_
-#define _CLOCKS_PER_SEC_ 50
+#define _CLOCKS_PER_SEC_ 1000
 #endif
 
 #define CLOCKS_PER_SEC _CLOCKS_PER_SEC_
