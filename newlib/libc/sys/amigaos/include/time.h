@@ -149,19 +149,19 @@ __stdargs int		getdate_r (const char *, struct tm *);
 #endif /* __GNU_VISIBLE */
 #endif /* HAVE_GETDATE */
 
-extern long timezone;
-extern int daylight;
-#define _timezone timezone
-#define _daylight daylight
+extern long * __timezone;
+extern int  * __daylight;
+extern char **__tzname;
 
-#if __POSIX_VISIBLE
-extern __IMPORT char *_tzname[2];
+//#define timezone (*__timezone)
+#define daylight (*__daylight)
+#define _timezone (*__timezone)
+#define _daylight (*__daylight)
 
-/* POSIX defines the external tzname being defined in time.h */
+#define _tzname (*__tzname)
 #ifndef tzname
-#define tzname _tzname
+#define tzname (*__tzname)
 #endif
-#endif /* __POSIX_VISIBLE */
 
 #ifdef __cplusplus
 }
@@ -173,6 +173,12 @@ extern __IMPORT char *_tzname[2];
 #include <cygwin/time.h>
 #endif /*__CYGWIN__*/
 
+/* Clocks, P1003.1b-1993, p. 263 */
+
+//__stdargs int clock_settime (clockid_t clock_id, const struct timespec *tp);
+__stdargs int clock_gettime (clockid_t clock_id, struct timespec *tp);
+__stdargs int clock_getres (clockid_t clock_id, struct timespec *res);
+
 #if defined(_POSIX_TIMERS)
 
 #include <signal.h>
@@ -181,11 +187,7 @@ extern __IMPORT char *_tzname[2];
 extern "C" {
 #endif
 
-/* Clocks, P1003.1b-1993, p. 263 */
 
-__stdargs int clock_settime (clockid_t clock_id, const struct timespec *tp);
-__stdargs int clock_gettime (clockid_t clock_id, struct timespec *tp);
-__stdargs int clock_getres (clockid_t clock_id, struct timespec *res);
 
 /* Create a Per-Process Timer, P1003.1b-1993, p. 264 */
 
@@ -280,7 +282,7 @@ extern "C" {
 
 #endif
 
-#if defined(_POSIX_MONOTONIC_CLOCK)
+#if 1 //defined(_POSIX_MONOTONIC_CLOCK)
 
 /*  The identifier for the system-wide monotonic clock, which is defined
  *      as a clock whose value cannot be set via clock_settime() and which 
